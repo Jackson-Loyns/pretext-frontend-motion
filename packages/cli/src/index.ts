@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, realpathSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -596,7 +596,16 @@ function requireOption(value: string | undefined, message: string): void {
   }
 }
 
-if (process.argv[1] !== undefined && path.resolve(process.argv[1]) === __filename) {
+function isCliEntrypoint(): boolean {
+  if (process.argv[1] === undefined) return false
+  try {
+    return realpathSync(process.argv[1]) === realpathSync(__filename)
+  } catch {
+    return path.resolve(process.argv[1]) === __filename
+  }
+}
+
+if (isCliEntrypoint()) {
   try {
     runCli()
   } catch (error) {
