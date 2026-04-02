@@ -1,14 +1,15 @@
+// @ts-check
+
 import { layout, prepare } from '@chenglou/pretext'
-import './styles.css'
 
 const messages = [
-  `__MESSAGE_1__`,
-  `__MESSAGE_2__`,
-  `__MESSAGE_3__`,
+  '__MESSAGE_1__',
+  '__MESSAGE_2__',
+  '__MESSAGE_3__',
 ]
 
-const app = document.querySelector<HTMLDivElement>('#app')
-if (app === null) throw new Error('#app not found')
+const app = document.querySelector('#app')
+if (!(app instanceof HTMLDivElement)) throw new Error('#app not found')
 
 const shell = document.createElement('main')
 shell.className = 'page'
@@ -31,10 +32,12 @@ shell.innerHTML = `
 `
 app.append(shell)
 
-const list = shell.querySelector<HTMLDivElement>('#messages')
-const widthInput = shell.querySelector<HTMLInputElement>('#width')
-const widthValue = shell.querySelector<HTMLOutputElement>('#width-value')
-if (list === null || widthInput === null || widthValue === null) throw new Error('controls not found')
+const list = shell.querySelector('#messages')
+const widthInput = shell.querySelector('#width')
+const widthValue = shell.querySelector('#width-value')
+if (!(list instanceof HTMLDivElement) || !(widthInput instanceof HTMLInputElement) || !(widthValue instanceof HTMLOutputElement)) {
+  throw new Error('controls not found')
+}
 
 const font = '16px "Avenir Next", "Segoe UI", sans-serif'
 const lineHeight = 24

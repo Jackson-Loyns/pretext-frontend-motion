@@ -39,6 +39,12 @@ Packaged usage:
 npx pretext-skill init claude-code --force
 ```
 
+To scaffold a runnable starter:
+
+```bash
+npm run cli -- scaffold --kind predictive-ui --out demo
+```
+
 ## Keep These Rules
 
 - `prepare()` is setup work, not a per-frame operation.

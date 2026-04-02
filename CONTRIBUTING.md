@@ -8,7 +8,7 @@ Open an issue when you find:
 - assistant-specific install path problems
 - skill recognition or trigger problems
 - weak visual output from the AI-facing bundle
-- example build failures
+- example runtime failures
 - documentation mistakes
 
 Include:
@@ -26,10 +26,10 @@ Include:
 2. Create a branch from `main`.
 3. Make the change.
 4. Run local checks:
-   - `python3 scripts/validate_skill.py .`
+   - `npm run cli -- validate .`
    - `npm run build`
    - `npm test`
-5. If you changed examples, build the affected example(s).
+5. If you changed examples, run the affected example(s) with `npm start`.
 6. Open a pull request with:
    - problem summary
    - change summary

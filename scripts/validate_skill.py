@@ -43,6 +43,8 @@ REQUIRED_FILES = [
     "packages/cli/package.json",
     "packages/cli/tsconfig.json",
     "packages/cli/src/index.ts",
+    "packages/cli/src/types.ts",
+    "packages/cli/src/starter-presets.ts",
     "packages/cli/scripts/copy-assets.mjs",
     "evals/evals.json",
     "scripts/pretext_cli.py",
@@ -113,7 +115,7 @@ def main() -> int:
         if not base.exists():
             errors.append(f"Missing starter directory: {starter}")
             continue
-        for rel in ["package.json", "index.html", "src/main.ts", "src/styles.css"]:
+        for rel in ["package.json", "index.html", "src/main.js", "src/styles.css"]:
             if not (base / rel).exists():
                 errors.append(f"Starter missing {rel}: {starter}")
 

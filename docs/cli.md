@@ -25,6 +25,8 @@ npx pretext-skill <command>
 | Install all targets | `npm run cli -- init all --force` |
 | Update installed targets | `npm run cli -- update --offline --force` |
 | Check install state | `npm run cli -- doctor` |
+| Scaffold a starter | `npm run cli -- scaffold --kind predictive-ui --out demo` |
+| Validate the repo | `npm run cli -- validate .` |
 
 ## Preferred Target Names
 
@@ -64,3 +66,12 @@ npm run cli -- update --offline --force
 ```
 
 Restart the target assistant after install or update so it reloads the bundle.
+
+## Example Runtime
+
+Bundled examples and generated starters are static ESM packages.
+After `npm install`, run them with:
+
+```bash
+npm start
+```

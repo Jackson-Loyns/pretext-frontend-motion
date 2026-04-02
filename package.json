@@ -10,6 +10,6 @@
   "scripts": {
     "build": "npm run build --workspace packages/cli",
     "test": "npm run test --workspace packages/cli",
-    "cli": "npm exec --workspace packages/cli pretext-skill --"
+    "cli": "node packages/cli/dist/index.js"
   }
 }

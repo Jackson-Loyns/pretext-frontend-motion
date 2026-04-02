@@ -5,7 +5,7 @@
 When you have already installed one or more targets from this repo, refresh them with:
 
 ```bash
-npx pretext-skill update --offline --force
+npm run cli -- update --offline --force
 ```
 
 This scans the supported install locations under your home directory and rewrites any bundle that already exists.
@@ -21,7 +21,7 @@ Re-run `npm run build` before `update` when:
 ## Inspect Current State
 
 ```bash
-npx pretext-skill doctor
+npm run cli -- doctor
 ```
 
 Use this to see which targets are installed and where they live.

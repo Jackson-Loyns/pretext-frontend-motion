@@ -1,10 +1,13 @@
-import { layoutNextLine, prepareWithSegments, type LayoutCursor } from '@chenglou/pretext'
-import './styles.css'
+// @ts-check
 
-const text = `__BODY_TEXT__`
+import { layoutNextLine, prepareWithSegments } from '@chenglou/pretext'
 
-const app = document.querySelector<HTMLDivElement>('#app')
-if (app === null) throw new Error('#app not found')
+/** @typedef {import('@chenglou/pretext').LayoutCursor} LayoutCursor */
+
+const text = '__BODY_TEXT__'
+
+const app = document.querySelector('#app')
+if (!(app instanceof HTMLDivElement)) throw new Error('#app not found')
 
 const root = document.createElement('main')
 root.className = 'page'
@@ -23,9 +26,9 @@ root.innerHTML = `
 `
 app.append(root)
 
-const body = root.querySelector<HTMLDivElement>('#body')
-const orb = root.querySelector<HTMLDivElement>('#orb')
-if (body === null || orb === null) throw new Error('layout nodes not found')
+const body = root.querySelector('#body')
+const orb = root.querySelector('#orb')
+if (!(body instanceof HTMLDivElement) || !(orb instanceof HTMLDivElement)) throw new Error('layout nodes not found')
 
 const prepared = prepareWithSegments(text, '18px "Iowan Old Style", Georgia, serif')
 const lineHeight = 29
@@ -34,12 +37,15 @@ let orbX = 320
 let orbY = 150
 let dragging = false
 
-function slotWidthForBand(y: number, containerWidth: number): { x: number; width: number } {
+/**
+ * @param {number} y
+ * @param {number} containerWidth
+ * @returns {{ x: number; width: number }}
+ */
+function slotWidthForBand(y, containerWidth) {
   const radius = 86
   const bandTop = y
   const bandBottom = y + lineHeight
-  const top = bandTop - orbY
-  const bottom = bandBottom - orbY
   const minDy = orbY >= bandTop && orbY <= bandBottom ? 0 : orbY < bandTop ? bandTop - orbY : orbY - bandBottom
 
   if (minDy >= radius) return { x: 0, width: containerWidth }
@@ -58,9 +64,10 @@ function slotWidthForBand(y: number, containerWidth: number): { x: number; width
 
 function render() {
   const containerWidth = body.clientWidth
-  let cursor: LayoutCursor = { segmentIndex: 0, graphemeIndex: 0 }
+  /** @type {LayoutCursor} */
+  let cursor = { segmentIndex: 0, graphemeIndex: 0 }
   let y = 0
-  const lines: string[] = []
+  const lines = []
 
   while (true) {
     const slot = slotWidthForBand(y, containerWidth)
@@ -76,7 +83,7 @@ function render() {
   orb.style.transform = `translate(${orbX - 86}px, ${orbY - 86}px)`
 }
 
-function moveOrb(clientX: number, clientY: number) {
+function moveOrb(clientX, clientY) {
   const rect = body.getBoundingClientRect()
   orbX = Math.max(86, Math.min(rect.width - 86, clientX - rect.left))
   orbY = Math.max(86, Math.min(rect.height - 86, clientY - rect.top))

@@ -1,5 +1,15 @@
+// @ts-check
+
 import { layoutWithLines, prepareWithSegments } from '@chenglou/pretext'
-import './styles.css'
+
+/**
+ * @typedef {object} Anchor
+ * @property {string} glyph
+ * @property {number} x
+ * @property {number} y
+ * @property {number} baseX
+ * @property {number} baseY
+ */
 
 const prepared = prepareWithSegments(
   'VARIABLE\nTYPOGRAPHIC\nASCII',
@@ -7,8 +17,8 @@ const prepared = prepareWithSegments(
   { whiteSpace: 'pre-wrap' },
 )
 
-const app = document.querySelector<HTMLDivElement>('#app')
-if (app === null) throw new Error('#app not found')
+const app = document.querySelector('#app')
+if (!(app instanceof HTMLDivElement)) throw new Error('#app not found')
 
 app.innerHTML = `
   <main class="page">
@@ -21,8 +31,8 @@ app.innerHTML = `
   </main>
 `
 
-const canvas = document.querySelector<HTMLCanvasElement>('#canvas')
-if (canvas === null) throw new Error('#canvas not found')
+const canvas = document.querySelector('#canvas')
+if (!(canvas instanceof HTMLCanvasElement)) throw new Error('#canvas not found')
 const ctx = canvas.getContext('2d')
 if (ctx === null) throw new Error('2d context not available')
 
@@ -30,10 +40,10 @@ let pointer = { x: -9999, y: -9999 }
 let animationFrame = 0
 const ascii = ' .:-=+*#%@'
 
-type Anchor = { glyph: string; x: number; y: number; baseX: number; baseY: number }
-let anchors: Anchor[] = []
+/** @type {Anchor[]} */
+let anchors = []
 
-function layoutAscii(width: number) {
+function layoutAscii(width) {
   const result = layoutWithLines(prepared, Math.min(width - 60, 760), 62)
   anchors = []
   let y = 90

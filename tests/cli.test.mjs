@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { spawnSync } from 'node:child_process'
@@ -81,6 +81,37 @@ test('doctor reports supported platforms', () => {
     assert.match(result.stdout, /codex \(Codex\):/)
     assert.match(result.stdout, /claude-code \(Claude Code\):/)
     assert.match(result.stdout, /windsurf \(Windsurf\):/)
+  } finally {
+    rmSync(home, { recursive: true, force: true })
+  }
+})
+
+test('scaffold creates a runnable static starter', () => {
+  const home = mkdtempSync(path.join(os.tmpdir(), 'pretext-home-'))
+  const outDir = path.join(home, 'demo')
+  try {
+    const result = run(['scaffold', '--kind', 'predictive-ui', '--out', outDir, '--title', 'Signal Wall'], home)
+    assert.equal(result.status, 0, result.stderr)
+    const packageJsonPath = path.join(outDir, 'package.json')
+    const indexHtmlPath = path.join(outDir, 'index.html')
+    const mainJsPath = path.join(outDir, 'src', 'main.js')
+    assert.equal(existsSync(packageJsonPath), true)
+    assert.equal(existsSync(indexHtmlPath), true)
+    assert.equal(existsSync(mainJsPath), true)
+    assert.match(readFileSync(packageJsonPath, 'utf8'), /"start": "serve -l 4173 \."/)
+    assert.match(readFileSync(indexHtmlPath, 'utf8'), /@chenglou\/pretext/)
+    assert.match(readFileSync(mainJsPath, 'utf8'), /Signal Wall/)
+  } finally {
+    rmSync(home, { recursive: true, force: true })
+  }
+})
+
+test('validate succeeds for the repo root', () => {
+  const home = mkdtempSync(path.join(os.tmpdir(), 'pretext-home-'))
+  try {
+    const result = run(['validate', repoRoot], home)
+    assert.equal(result.status, 0, result.stderr)
+    assert.match(result.stdout, /Validation passed\./)
   } finally {
     rmSync(home, { recursive: true, force: true })
   }

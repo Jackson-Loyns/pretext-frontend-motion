@@ -5,39 +5,14 @@ import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-type CommandName = 'init' | 'update' | 'versions' | 'doctor' | 'help'
+import { DEFAULT_PRESETS, listKinds, STARTER_DIRECTORIES, STARTER_PRESETS } from './starter-presets.js'
+import type { CliOptions, CommandName, InstallRecord, PlatformConfig, StarterKind } from './types.js'
 
-type CliOptions = {
-  ai?: string
-  offline: boolean
-  force: boolean
-}
+export type { CliOptions, CommandName, InstallRecord, PlatformConfig, StarterKind } from './types.js'
+export { DEFAULT_PRESETS, listKinds, STARTER_DIRECTORIES, STARTER_PRESETS } from './starter-presets.js'
 
-type PlatformConfig = {
-  platform: string
-  displayName: string
-  folderStructure: {
-    root: string
-    skillPath: string
-    filename: string
-  }
-  frontmatter: {
-    name: string
-    description: string
-  }
-  title: string
-  entryType: 'skill' | 'prompt'
-  sections?: {
-    quickReference?: boolean
-  }
-}
-
-type InstallRecord = {
-  version: string
-  platform: string
-  displayName: string
-  installedAt: string
-  installPath: string
+type ParsedOptions = CliOptions & {
+  positionals: string[]
 }
 
 const SHARED_FRONTMATTER_DESCRIPTION =
@@ -82,18 +57,78 @@ const PREFERRED_TARGETS: Record<string, string> = {
   windsurf: 'windsurf',
 }
 
+const REQUIRED_FILES = [
+  'package.json',
+  'SKILL.md',
+  'README.md',
+  'CONTRIBUTING.md',
+  'agents/openai.yaml',
+  'docs/quick-reference.md',
+  'docs/cli.md',
+  'docs/official-demos.md',
+  'docs/platforms/README.md',
+  'docs/install.md',
+  'docs/update.md',
+  'docs/guide.md',
+  'docs/design-rules.md',
+  'docs/examples.md',
+  'docs/troubleshooting.md',
+  'references/official-notes.md',
+  'references/capabilities.md',
+  'references/patterns.md',
+  'references/design-rules.md',
+  'references/react-migration.md',
+  'core/metadata/demos.json',
+  'core/metadata/example-recognition.json',
+  'core/templates/skill.md',
+  'core/templates/prompt.md',
+  'core/bundle/references/official-notes.md',
+  'core/bundle/references/demo-family-map.md',
+  'core/bundle/references/prompt-recipes.md',
+  'core/bundle/references/design-rules.md',
+  'core/bundle/references/font-strategy.md',
+  'core/bundle/agents/openai.yaml',
+  'core/bundle/examples/README.md',
+  'packages/cli/package.json',
+  'packages/cli/tsconfig.json',
+  'packages/cli/src/index.ts',
+  'packages/cli/src/types.ts',
+  'packages/cli/src/starter-presets.ts',
+  'packages/cli/scripts/copy-assets.mjs',
+  'evals/evals.json',
+  'scripts/pretext_cli.py',
+  'scripts/new_pretext_demo.py',
+  'scripts/install_symlink.sh',
+  'scripts/update_from_git.sh',
+] as const
+
+const STARTERS = [
+  'core/bundle/examples/accordion',
+  'core/bundle/examples/bubbles',
+  'core/bundle/examples/dynamic-layout',
+  'core/bundle/examples/editorial-engine',
+  'core/bundle/examples/masonry',
+  'core/bundle/examples/variable-typographic-ascii',
+] as const
+
+const EXECUTABLE_SCRIPTS = [
+  'scripts/pretext_cli.py',
+  'scripts/new_pretext_demo.py',
+  'scripts/install_symlink.sh',
+  'scripts/update_from_git.sh',
+] as const
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-function main(): void {
-  const [commandRaw, ...rest] = process.argv.slice(2)
+export function runCli(argv = process.argv.slice(2)): void {
+  const [commandRaw, ...rest] = argv
   const command = (commandRaw ?? 'help') as CommandName
   const options = parseOptions(rest)
 
   switch (command) {
     case 'init':
-      requireOption(options.ai, '--ai is required for init')
-      initInstall(options.ai!, options)
+      initInstall(options.ai ?? options.positionals[0], options)
       return
     case 'update':
       updateInstalled(options)
@@ -104,19 +139,33 @@ function main(): void {
     case 'doctor':
       printDoctor()
       return
+    case 'scaffold':
+      scaffoldStarter(options)
+      return
+    case 'list-kinds':
+      printKinds()
+      return
+    case 'list-presets':
+      printPresets(options.kind ?? options.positionals[0])
+      return
+    case 'validate':
+      validateSkill(options.path ?? options.positionals[0] ?? '.')
+      return
     default:
       printHelp()
   }
 }
 
-function parseOptions(args: string[]): CliOptions {
-  const options: CliOptions = {
+function parseOptions(args: string[]): ParsedOptions {
+  const options: ParsedOptions = {
     offline: true,
     force: false,
+    positionals: [],
   }
 
-  for (let index = 0; index < args.length; index++) {
-    const arg = args[index]!
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index]
+    if (arg === undefined) continue
     if (arg === '--offline') {
       options.offline = true
       continue
@@ -130,11 +179,35 @@ function parseOptions(args: string[]): CliOptions {
       index += 1
       continue
     }
-    if (!arg.startsWith('-') && options.ai === undefined) {
-      options.ai = arg
+    if (arg === '--kind') {
+      options.kind = args[index + 1] as StarterKind | undefined
+      index += 1
       continue
     }
-    throw new Error(`Unknown option: ${arg}`)
+    if (arg === '--out') {
+      options.out = args[index + 1]
+      index += 1
+      continue
+    }
+    if (arg === '--title') {
+      options.title = args[index + 1]
+      index += 1
+      continue
+    }
+    if (arg === '--preset') {
+      options.preset = args[index + 1]
+      index += 1
+      continue
+    }
+    if (arg === '--path') {
+      options.path = args[index + 1]
+      index += 1
+      continue
+    }
+    if (arg.startsWith('-')) {
+      throw new Error(`Unknown option: ${arg}`)
+    }
+    options.positionals.push(arg)
   }
 
   return options
@@ -145,11 +218,13 @@ function printHelp(): void {
 
 Usage:
   pretext-skill init <target> [--force]
-  pretext-skill init --ai <target> [--force]
-  pretext-skill init all [--force]
   pretext-skill update [--offline] [--force]
   pretext-skill versions
   pretext-skill doctor
+  pretext-skill scaffold --kind <kind> --out <dir> [--title <title>] [--preset <name>]
+  pretext-skill list-kinds
+  pretext-skill list-presets [--kind <kind>]
+  pretext-skill validate [path]
 
 Preferred targets:
   codex
@@ -194,13 +269,16 @@ function printDoctor(): void {
   }
 }
 
-function initInstall(target: string, options: CliOptions): void {
+function initInstall(target: string | undefined, options: CliOptions): void {
+  requireOption(target, 'A target is required for init')
+  if (target === undefined) throw new Error('A target is required for init')
+  const resolvedTarget = target
   const platforms = loadPlatforms()
   if (options.offline) {
     console.log('Using bundled assets only.')
   }
 
-  const normalizedTarget = normalizeTarget(target)
+  const normalizedTarget = normalizeTarget(resolvedTarget)
   const selected = normalizedTarget === 'all'
     ? platforms
     : platforms.filter(platform => platform.platform === normalizedTarget)
@@ -214,10 +292,140 @@ function initInstall(target: string, options: CliOptions): void {
   }
 }
 
+function scaffoldStarter(options: CliOptions): void {
+  const kind = options.kind
+  const out = options.out
+  const title = options.title ?? 'Pretext Demo'
+
+  requireOption(kind, '--kind is required for scaffold')
+  requireOption(out, '--out is required for scaffold')
+  if (kind === undefined) throw new Error('--kind is required for scaffold')
+  if (out === undefined) throw new Error('--out is required for scaffold')
+  const starterKind = kind
+  const outputDirectory = out
+
+  const starterRoot = resolveStarterRoot()
+  const starterDirectory = STARTER_DIRECTORIES[starterKind]
+  const starterPath = path.join(starterRoot, starterDirectory)
+  if (!existsSync(starterPath)) {
+    throw new Error(`Starter not found: ${starterPath}`)
+  }
+
+  const preset = options.preset ?? DEFAULT_PRESETS[starterKind]
+  const presetValues = STARTER_PRESETS[starterKind][preset]
+  if (presetValues === undefined) {
+    throw new Error(`Unknown preset for ${starterKind}: ${preset}`)
+  }
+
+  const outPath = path.resolve(process.cwd(), outputDirectory)
+  if (existsSync(outPath)) {
+    throw new Error(`Output already exists: ${outPath}`)
+  }
+
+  cpSync(starterPath, outPath, { recursive: true })
+  replaceTokens(outPath, {
+    '__DEMO_TITLE__': title,
+    ...presetValues,
+  })
+
+  console.log(`Created ${starterKind} demo at ${outPath}`)
+  console.log(`Preset: ${preset}`)
+  console.log('Next steps:')
+  console.log(`  cd ${outPath}`)
+  console.log('  npm install')
+  console.log('  npm start')
+}
+
+function printKinds(): void {
+  console.log('Available kinds:')
+  for (const kind of listKinds()) {
+    console.log(`  - ${kind}`)
+  }
+}
+
+function printPresets(kind?: string): void {
+  if (kind !== undefined) {
+    if (!isStarterKind(kind)) {
+      throw new Error(`Unknown kind for presets: ${kind}`)
+    }
+    console.log(`Available presets for ${kind}:`)
+    for (const preset of Object.keys(STARTER_PRESETS[kind]).sort()) {
+      const marker = DEFAULT_PRESETS[kind] === preset ? ' (default)' : ''
+      console.log(`  - ${preset}${marker}`)
+    }
+    return
+  }
+
+  console.log('Available presets:')
+  for (const currentKind of listKinds()) {
+    console.log(`- ${currentKind}:`)
+    for (const preset of Object.keys(STARTER_PRESETS[currentKind]).sort()) {
+      const marker = DEFAULT_PRESETS[currentKind] === preset ? ' (default)' : ''
+      console.log(`    - ${preset}${marker}`)
+    }
+  }
+}
+
+function validateSkill(targetPath: string): void {
+  const root = path.resolve(process.cwd(), targetPath)
+  const errors: string[] = []
+
+  for (const relativePath of REQUIRED_FILES) {
+    const absolutePath = path.join(root, relativePath)
+    if (!existsSync(absolutePath)) {
+      errors.push(`Missing required file: ${relativePath}`)
+    }
+  }
+
+  const skillPath = path.join(root, 'SKILL.md')
+  if (existsSync(skillPath)) {
+    const skillText = readFileSync(skillPath, 'utf8')
+    if (!hasFrontmatterField(skillText, 'name')) {
+      errors.push('SKILL.md is missing frontmatter field: name')
+    }
+    if (!hasFrontmatterField(skillText, 'description')) {
+      errors.push('SKILL.md is missing frontmatter field: description')
+    }
+  }
+
+  for (const relativePath of EXECUTABLE_SCRIPTS) {
+    const absolutePath = path.join(root, relativePath)
+    if (!existsSync(absolutePath)) continue
+    const mode = statSync(absolutePath).mode
+    if ((mode & 0o100) === 0) {
+      errors.push(`${relativePath} is not executable`)
+    }
+  }
+
+  for (const starter of STARTERS) {
+    const starterRoot = path.join(root, starter)
+    if (!existsSync(starterRoot)) {
+      errors.push(`Missing starter directory: ${starter}`)
+      continue
+    }
+    for (const relativePath of ['package.json', 'index.html', 'src/main.js', 'src/styles.css']) {
+      if (!existsSync(path.join(starterRoot, relativePath))) {
+        errors.push(`Starter missing ${relativePath}: ${starter}`)
+      }
+    }
+  }
+
+  if (errors.length > 0) {
+    console.log('Validation failed:')
+    for (const error of errors) {
+      console.log(`- ${error}`)
+    }
+    throw new Error('Skill validation failed.')
+  }
+
+  console.log('Validation passed.')
+  console.log(`Skill root: ${root}`)
+  console.log(`Checked files: ${REQUIRED_FILES.length}`)
+  console.log(`Checked starters: ${STARTERS.length}`)
+}
+
 function normalizeTarget(target: string): string {
-  const normalized = PLATFORM_ALIASES[target.toLowerCase()]
-  if (normalized !== undefined) return normalized
-  return target.toLowerCase()
+  return PLATFORM_ALIASES[target.toLowerCase()] ?? target.toLowerCase()
 }
 
 function getPreferredTarget(platform: string): string {
@@ -256,7 +464,8 @@ function installPlatform(platform: PlatformConfig, force: boolean): void {
   }
 
   mkdirSync(installPath, { recursive: true })
-  const bundleRoot = path.join(resolveAssetRoot(), 'core', 'bundle')
+  const assetRoot = resolveAssetRoot()
+  const bundleRoot = path.join(assetRoot, 'core', 'bundle')
   cpSync(bundleRoot, installPath, { recursive: true })
 
   const entry = renderEntry(platform)
@@ -270,7 +479,7 @@ function installPlatform(platform: PlatformConfig, force: boolean): void {
         displayName: platform.displayName,
         installedAt: new Date().toISOString(),
         installPath,
-      },
+      } satisfies InstallRecord,
       null,
       2,
     ),
@@ -288,9 +497,12 @@ function renderEntry(platform: PlatformConfig): string {
   template = template.replaceAll('{{name}}', platform.frontmatter.name)
   template = template.replaceAll('{{frontmatterDescription}}', SHARED_FRONTMATTER_DESCRIPTION)
   template = template.replaceAll('{{title}}', platform.title)
-  template = template.replaceAll('{{quickReferenceSection}}', platform.sections?.quickReference
-    ? '\n## Quick Reference\n\n- Start with `references/demo-family-map.md`.\n- Use `examples/` for the first six official demos.\n- Use `blueprints/` for Justification Comparison and Rich Text.\n'
-    : '')
+  template = template.replaceAll(
+    '{{quickReferenceSection}}',
+    platform.sections?.quickReference
+      ? '\n## Quick Reference\n\n- Start with `references/demo-family-map.md`.\n- Use `examples/` for the first six official demos.\n- Use `blueprints/` for Justification Comparison and Rich Text.\n'
+      : '',
+  )
   return template
 }
 
@@ -309,13 +521,39 @@ function resolveAssetRoot(): string {
   throw new Error('Unable to resolve bundled assets.')
 }
 
+function resolveStarterRoot(): string {
+  const assetRoot = resolveAssetRoot()
+  const packagedRoot = path.join(assetRoot, 'starters')
+  if (existsSync(packagedRoot)) return packagedRoot
+
+  const repoRoot = path.join(assetRoot, 'assets')
+  if (existsSync(repoRoot)) return repoRoot
+
+  throw new Error('Unable to resolve starter assets.')
+}
+
+function replaceTokens(root: string, replacements: Record<string, string>): void {
+  const entries = readdirSync(root, { recursive: true })
+  for (const entry of entries) {
+    const currentPath = path.join(root, entry.toString())
+    if (!statSync(currentPath).isFile()) continue
+    const extension = path.extname(currentPath).toLowerCase()
+    if (!['.js', '.json', '.html', '.css', '.md'].includes(extension)) continue
+    let content = readFileSync(currentPath, 'utf8')
+    for (const [token, value] of Object.entries(replacements)) {
+      content = content.replaceAll(token, value)
+    }
+    writeFileSync(currentPath, content, 'utf8')
+  }
+}
+
 function loadPlatforms(): PlatformConfig[] {
   const root = resolveAssetRoot()
-  const dir = path.join(root, 'platforms')
-  const entries = readdirSync(dir)
+  const directory = path.join(root, 'platforms')
+  return readdirSync(directory)
     .filter(name => name.endsWith('.json'))
     .sort()
-  return entries.map(entry => JSON.parse(readFileSync(path.join(dir, entry), 'utf8')) as PlatformConfig)
+    .map(entry => JSON.parse(readFileSync(path.join(directory, entry), 'utf8')) as PlatformConfig)
 }
 
 function getInstallPath(platform: PlatformConfig): string {
@@ -335,10 +573,35 @@ function getCliVersion(): string {
   return '0.0.0'
 }
 
+function hasFrontmatterField(text: string, field: string): boolean {
+  if (!text.startsWith('---\n')) return false
+  try {
+    const withoutOpening = text.slice(4)
+    const closingIndex = withoutOpening.indexOf('\n---')
+    if (closingIndex === -1) return false
+    const frontmatter = withoutOpening.slice(0, closingIndex)
+    return frontmatter.split('\n').some(line => line.startsWith(`${field}:`))
+  } catch {
+    return false
+  }
+}
+
+function isStarterKind(value: string): value is StarterKind {
+  return value in STARTER_DIRECTORIES
+}
+
 function requireOption(value: string | undefined, message: string): void {
   if (value === undefined || value.length === 0) {
     throw new Error(message)
   }
 }
 
-main()
+if (process.argv[1] !== undefined && path.resolve(process.argv[1]) === __filename) {
+  try {
+    runCli()
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    console.error(message)
+    process.exitCode = 1
+  }
+}

@@ -1,16 +1,17 @@
+// @ts-check
+
 import { layout, prepare } from '@chenglou/pretext'
-import './styles.css'
 
 const cards = [
   'A short card can stay small without waiting for DOM reads.',
   'Longer bulletin text should still pack cleanly when height prediction comes from Pretext before the grid settles.',
   'Mixed-length notes are the real test for a masonry-like surface.',
   'Measure once, relayout cheaply, and keep the packing stable through resize.',
-  'The composition should feel like an editorial board, not a dashboard.'
+  'The composition should feel like an editorial board, not a dashboard.',
 ]
 
-const app = document.querySelector<HTMLDivElement>('#app')
-if (app === null) throw new Error('#app not found')
+const app = document.querySelector('#app')
+if (!(app instanceof HTMLDivElement)) throw new Error('#app not found')
 
 app.innerHTML = `
   <main class="page">
@@ -32,10 +33,12 @@ app.innerHTML = `
   </main>
 `
 
-const widthInput = document.querySelector<HTMLInputElement>('#width')
-const widthValue = document.querySelector<HTMLOutputElement>('#value')
-const grid = document.querySelector<HTMLDivElement>('#grid')
-if (widthInput === null || widthValue === null || grid === null) throw new Error('masonry nodes not found')
+const widthInput = document.querySelector('#width')
+const widthValue = document.querySelector('#value')
+const grid = document.querySelector('#grid')
+if (!(widthInput instanceof HTMLInputElement) || !(widthValue instanceof HTMLOutputElement) || !(grid instanceof HTMLDivElement)) {
+  throw new Error('masonry nodes not found')
+}
 
 const font = '16px "Avenir Next", "Segoe UI", sans-serif'
 const lineHeight = 24

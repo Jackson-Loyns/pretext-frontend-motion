@@ -2,6 +2,9 @@
 
 Use these as request patterns for assistants. Each one maps directly to an official Pretext family.
 
+The runnable entries are static ESM packages that depend directly on `@chenglou/pretext`.
+They no longer require Vite or a build step before local preview.
+
 ## Runnable Families
 
 | Demo family | Use this when the request sounds like | Start from |

@@ -1,10 +1,20 @@
+// @ts-check
+
 import { layoutWithLines, prepareWithSegments } from '@chenglou/pretext'
-import './styles.css'
+
+/**
+ * @typedef {object} Glyph
+ * @property {string} char
+ * @property {number} homeX
+ * @property {number} homeY
+ * @property {number} x
+ * @property {number} y
+ */
 
 const phrase = `__PHRASE_LINE_1__
 __PHRASE_LINE_2__`
-const app = document.querySelector<HTMLDivElement>('#app')
-if (app === null) throw new Error('#app not found')
+const app = document.querySelector('#app')
+if (!(app instanceof HTMLDivElement)) throw new Error('#app not found')
 
 app.innerHTML = `
   <main class="page">
@@ -17,8 +27,8 @@ app.innerHTML = `
   </main>
 `
 
-const canvas = document.querySelector<HTMLCanvasElement>('#canvas')
-if (canvas === null) throw new Error('#canvas not found')
+const canvas = document.querySelector('#canvas')
+if (!(canvas instanceof HTMLCanvasElement)) throw new Error('#canvas not found')
 const ctx = canvas.getContext('2d')
 if (ctx === null) throw new Error('2d context not available')
 
@@ -26,8 +36,8 @@ const prepared = prepareWithSegments(phrase, '700 64px "Avenir Next", sans-serif
 let pointer = { x: -9999, y: -9999 }
 let animationFrame = 0
 
-type Glyph = { char: string; homeX: number; homeY: number; x: number; y: number }
-let glyphs: Glyph[] = []
+/** @type {Glyph[]} */
+let glyphs = []
 
 function resize() {
   const dpr = Math.max(1, window.devicePixelRatio || 1)
@@ -38,7 +48,7 @@ function resize() {
   layoutGlyphs(rect.width)
 }
 
-function layoutGlyphs(width: number) {
+function layoutGlyphs(width) {
   const result = layoutWithLines(prepared, Math.min(width - 40, 760), 72)
   glyphs = []
   const startX = 24

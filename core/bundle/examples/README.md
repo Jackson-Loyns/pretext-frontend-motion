@@ -2,6 +2,12 @@
 
 Start here when the request maps to a concrete official demo family.
 
+Each runnable example is a static ESM package:
+
+- it depends directly on the official `@chenglou/pretext` npm package
+- it uses the package's own exported type definitions
+- it runs with `npm install` and `npm start`
+
 | Demo family | Folder | APIs | Use it for |
 | --- | --- | --- | --- |
 | Accordion | `examples/accordion` | `prepare`, `layout` | measured expand/collapse panels |

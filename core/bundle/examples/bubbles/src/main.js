@@ -1,5 +1,6 @@
+// @ts-check
+
 import { layout, prepare } from '@chenglou/pretext'
-import './styles.css'
 
 const messages = [
   'Measured before paint, not guessed after paint.',
@@ -7,8 +8,8 @@ const messages = [
   'Pretext keeps the line count and text block height stable before the UI commits.',
 ]
 
-const app = document.querySelector<HTMLDivElement>('#app')
-if (app === null) throw new Error('#app not found')
+const app = document.querySelector('#app')
+if (!(app instanceof HTMLDivElement)) throw new Error('#app not found')
 
 app.innerHTML = `
   <main class="page">
@@ -33,10 +34,12 @@ app.innerHTML = `
 const font = '16px "Avenir Next", "Segoe UI", sans-serif'
 const lineHeight = 24
 const prepared = messages.map(text => ({ text, prepared: prepare(text, font) }))
-const widthInput = document.querySelector<HTMLInputElement>('#width')
-const widthValue = document.querySelector<HTMLOutputElement>('#value')
-const list = document.querySelector<HTMLDivElement>('#messages')
-if (widthInput === null || widthValue === null || list === null) throw new Error('bubble controls not found')
+const widthInput = document.querySelector('#width')
+const widthValue = document.querySelector('#value')
+const list = document.querySelector('#messages')
+if (!(widthInput instanceof HTMLInputElement) || !(widthValue instanceof HTMLOutputElement) || !(list instanceof HTMLDivElement)) {
+  throw new Error('bubble controls not found')
+}
 
 function render() {
   const chatWidth = Number(widthInput.value)

@@ -1,5 +1,6 @@
+// @ts-check
+
 import { layout, prepare } from '@chenglou/pretext'
-import './styles.css'
 
 const sections = [
   {
@@ -19,8 +20,8 @@ const sections = [
   },
 ]
 
-const app = document.querySelector<HTMLDivElement>('#app')
-if (app === null) throw new Error('#app not found')
+const app = document.querySelector('#app')
+if (!(app instanceof HTMLDivElement)) throw new Error('#app not found')
 
 app.innerHTML = `
   <main class="page">
@@ -33,8 +34,8 @@ app.innerHTML = `
   </main>
 `
 
-const accordion = document.querySelector<HTMLDivElement>('#accordion')
-if (accordion === null) throw new Error('#accordion not found')
+const accordion = document.querySelector('#accordion')
+if (!(accordion instanceof HTMLDivElement)) throw new Error('#accordion not found')
 
 const font = '16px "Avenir Next", "Segoe UI", sans-serif'
 const lineHeight = 24
@@ -43,7 +44,7 @@ const prepared = sections.map(section => ({
   prepared: prepare(section.text, font),
 }))
 
-let openId = sections[0]!.id
+let openId = sections[0].id
 
 function buildMarkup() {
   accordion.innerHTML = prepared.map(section => `
@@ -63,19 +64,20 @@ function buildMarkup() {
 
 function render() {
   const width = Math.max(220, accordion.clientWidth - 92)
-  const items = Array.from(accordion.querySelectorAll<HTMLElement>('.item'))
+  const items = Array.from(accordion.querySelectorAll('.item'))
   for (const item of items) {
-    const id = item.dataset['id']
+    if (!(item instanceof HTMLElement)) continue
+    const id = item.dataset.id
     if (id === undefined) continue
     const section = prepared.find(entry => entry.id === id)
     if (section === undefined) continue
-    const body = item.querySelector<HTMLElement>('.body')
-    const meta = item.querySelector<HTMLElement>('.meta')
-    if (body === null || meta === null) continue
+    const body = item.querySelector('.body')
+    const meta = item.querySelector('.meta')
+    if (!(body instanceof HTMLElement) || !(meta instanceof HTMLElement)) continue
     const metrics = layout(section.prepared, width, lineHeight)
     const expanded = openId === section.id
     body.style.height = expanded ? `${metrics.height + 32}px` : '0px'
-    item.dataset['expanded'] = expanded ? 'true' : 'false'
+    item.dataset.expanded = expanded ? 'true' : 'false'
     meta.textContent = `${metrics.lineCount} lines · ${Math.round(metrics.height)}px`
   }
 }
@@ -83,9 +85,9 @@ function render() {
 accordion.addEventListener('click', event => {
   const target = event.target
   if (!(target instanceof Element)) return
-  const item = target.closest<HTMLElement>('.item')
-  if (item === null) return
-  const id = item.dataset['id']
+  const item = target.closest('.item')
+  if (!(item instanceof HTMLElement)) return
+  const id = item.dataset.id
   if (id === undefined) return
   openId = openId === id ? '' : id
   render()

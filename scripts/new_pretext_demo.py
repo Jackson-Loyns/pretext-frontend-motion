@@ -170,7 +170,7 @@ def main() -> int:
     print("Next steps:")
     print(f"  cd {out_dir}")
     print("  npm install")
-    print("  npm run dev")
+    print("  npm start")
     return 0
 
 

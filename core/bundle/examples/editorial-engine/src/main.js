@@ -1,5 +1,8 @@
-import { layoutNextLine, prepareWithSegments, walkLineRanges, type LayoutCursor } from '@chenglou/pretext'
-import './styles.css'
+// @ts-check
+
+import { layoutNextLine, prepareWithSegments, walkLineRanges } from '@chenglou/pretext'
+
+/** @typedef {import('@chenglou/pretext').LayoutCursor} LayoutCursor */
 
 const articlePrepared = prepareWithSegments(
   'Editorial Engine is where moving geometry, pull quotes, and multi-column text flow all meet. The text is not decorative. It is routed against changing available widths, which means the layout can respond live to the orb and still remain measurable, intentional, and editorial.',
@@ -11,8 +14,8 @@ const quotePrepared = prepareWithSegments(
   '700 22px "Helvetica Neue", Arial, sans-serif',
 )
 
-const app = document.querySelector<HTMLDivElement>('#app')
-if (app === null) throw new Error('#app not found')
+const app = document.querySelector('#app')
+if (!(app instanceof HTMLDivElement)) throw new Error('#app not found')
 
 app.innerHTML = `
   <main class="page">
@@ -32,12 +35,12 @@ app.innerHTML = `
   </main>
 `
 
-const engine = document.querySelector<HTMLDivElement>('#engine')
-const quote = document.querySelector<HTMLDivElement>('#quote')
-const columnA = document.querySelector<HTMLDivElement>('#column-a')
-const columnB = document.querySelector<HTMLDivElement>('#column-b')
-const orb = document.querySelector<HTMLDivElement>('#orb')
-if (engine === null || quote === null || columnA === null || columnB === null || orb === null) {
+const engine = document.querySelector('#engine')
+const quote = document.querySelector('#quote')
+const columnA = document.querySelector('#column-a')
+const columnB = document.querySelector('#column-b')
+const orb = document.querySelector('#orb')
+if (!(engine instanceof HTMLDivElement) || !(quote instanceof HTMLDivElement) || !(columnA instanceof HTMLDivElement) || !(columnB instanceof HTMLDivElement) || !(orb instanceof HTMLDivElement)) {
   throw new Error('editorial engine nodes not found')
 }
 
@@ -45,7 +48,7 @@ let orbX = 210
 let orbY = 164
 let dragging = false
 
-function getQuoteMetrics(maxWidth: number) {
+function getQuoteMetrics(maxWidth) {
   let lineCount = 0
   let maxLineWidth = 0
   walkLineRanges(quotePrepared, maxWidth, line => {
@@ -58,7 +61,7 @@ function getQuoteMetrics(maxWidth: number) {
   }
 }
 
-function slotWidth(y: number, lineHeight: number, width: number) {
+function slotWidth(y, lineHeight, width) {
   const radius = 78
   const minDy = orbY >= y && orbY <= y + lineHeight ? 0 : Math.min(Math.abs(orbY - y), Math.abs(orbY - (y + lineHeight)))
   if (minDy >= radius) return { x: 0, width }
@@ -70,8 +73,17 @@ function slotWidth(y: number, lineHeight: number, width: number) {
   return leftSlot >= rightSlot ? { x: 0, width: leftSlot } : { x: right, width: rightSlot }
 }
 
-function flowColumn(target: HTMLElement, cursor: LayoutCursor, width: number, yStart: number, yLimit: number, avoidOrb: boolean) {
-  const lines: string[] = []
+/**
+ * @param {HTMLElement} target
+ * @param {LayoutCursor} cursor
+ * @param {number} width
+ * @param {number} yStart
+ * @param {number} yLimit
+ * @param {boolean} avoidOrb
+ * @returns {LayoutCursor}
+ */
+function flowColumn(target, cursor, width, yStart, yLimit, avoidOrb) {
+  const lines = []
   let y = yStart
   let nextCursor = cursor
   while (y < yLimit) {
@@ -90,15 +102,16 @@ function render() {
   const quoteMetrics = getQuoteMetrics(220)
   quote.style.width = `${quoteMetrics.width}px`
   quote.style.height = `${quoteMetrics.height}px`
-  quote.innerHTML = `<div class="quote-inner">Live reflow matters only if the composition still feels designed.</div>`
+  quote.innerHTML = '<div class="quote-inner">Live reflow matters only if the composition still feels designed.</div>'
 
-  let cursor: LayoutCursor = { segmentIndex: 0, graphemeIndex: 0 }
+  /** @type {LayoutCursor} */
+  let cursor = { segmentIndex: 0, graphemeIndex: 0 }
   cursor = flowColumn(columnA, cursor, columnA.clientWidth, 0, 300, true)
   flowColumn(columnB, cursor, columnB.clientWidth, 0, 300, false)
   orb.style.transform = `translate(${orbX - 78}px, ${orbY - 78}px)`
 }
 
-function moveOrb(clientX: number, clientY: number) {
+function moveOrb(clientX, clientY) {
   const rect = columnA.getBoundingClientRect()
   orbX = Math.max(78, Math.min(rect.width - 78, clientX - rect.left))
   orbY = Math.max(78, Math.min(300 - 78, clientY - rect.top))

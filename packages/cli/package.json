@@ -3,8 +3,17 @@
   "version": "0.3.0",
   "description": "Installer CLI for the Pretext Frontend Motion multi-platform skill bundle",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "bin": {
     "pretext-skill": "./dist/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
   },
   "files": [
     "dist",

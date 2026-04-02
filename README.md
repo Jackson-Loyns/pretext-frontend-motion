@@ -6,6 +6,7 @@ It is based on the official Pretext demos by Cheng Lou and on the upstream repos
 
 - Demo site: [https://chenglou.me/pretext/](https://chenglou.me/pretext/)
 - Source repository: [https://github.com/chenglou/pretext](https://github.com/chenglou/pretext)
+- Official npm package used by runnable examples and starters: `@chenglou/pretext`
 
 ## When To Use This Bundle
 
@@ -85,6 +86,7 @@ See [docs/official-demos.md](docs/official-demos.md) for the full mapping.
 | Install all targets | `npm run cli -- init all --force` |
 | Update installed targets | `npm run cli -- update --offline --force` |
 | Check install state | `npm run cli -- doctor` |
+| Scaffold a starter | `npm run cli -- scaffold --kind predictive-ui --out demo` |
 
 ## Read Next
 
@@ -99,4 +101,5 @@ See [docs/official-demos.md](docs/official-demos.md) for the full mapping.
 
 - This bundle is browser-first.
 - Pretext stays in the actual layout path.
+- Runnable examples and starters depend directly on the official `@chenglou/pretext` package.
 - The installed references include font and design rules because generic fonts and generic motion produce weak results.

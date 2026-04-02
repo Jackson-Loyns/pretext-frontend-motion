@@ -1,5 +1,8 @@
-import { layoutNextLine, prepareWithSegments, type LayoutCursor } from '@chenglou/pretext'
-import './styles.css'
+// @ts-check
+
+import { layoutNextLine, prepareWithSegments } from '@chenglou/pretext'
+
+/** @typedef {import('@chenglou/pretext').LayoutCursor} LayoutCursor */
 
 const titlePrepared = prepareWithSegments(
   'Dynamic Layout should feel composed, fixed-height, and geometry-aware.',
@@ -11,8 +14,8 @@ const bodyPrepared = prepareWithSegments(
   '18px "Iowan Old Style", Georgia, serif',
 )
 
-const app = document.querySelector<HTMLDivElement>('#app')
-if (app === null) throw new Error('#app not found')
+const app = document.querySelector('#app')
+if (!(app instanceof HTMLDivElement)) throw new Error('#app not found')
 
 app.innerHTML = `
   <main class="page">
@@ -31,17 +34,19 @@ app.innerHTML = `
   </main>
 `
 
-const canvas = document.querySelector<HTMLDivElement>('#canvas')
-const title = document.querySelector<HTMLDivElement>('#title')
-const body = document.querySelector<HTMLDivElement>('#body')
-const orb = document.querySelector<HTMLDivElement>('#orb')
-if (canvas === null || title === null || body === null || orb === null) throw new Error('dynamic layout nodes not found')
+const canvas = document.querySelector('#canvas')
+const title = document.querySelector('#title')
+const body = document.querySelector('#body')
+const orb = document.querySelector('#orb')
+if (!(canvas instanceof HTMLDivElement) || !(title instanceof HTMLDivElement) || !(body instanceof HTMLDivElement) || !(orb instanceof HTMLDivElement)) {
+  throw new Error('dynamic layout nodes not found')
+}
 
 let orbX = 460
 let orbY = 170
 let dragging = false
 
-function slotForBand(y: number, lineHeight: number, width: number) {
+function slotForBand(y, lineHeight, width) {
   const radius = 88
   const minDy = orbY >= y && orbY <= y + lineHeight ? 0 : Math.min(Math.abs(orbY - y), Math.abs(orbY - (y + lineHeight)))
   if (minDy >= radius) return { x: 0, width }
@@ -53,10 +58,18 @@ function slotForBand(y: number, lineHeight: number, width: number) {
   return leftSlot >= rightSlot ? { x: 0, width: leftSlot } : { x: right, width: rightSlot }
 }
 
-function renderStream(target: HTMLElement, prepared: ReturnType<typeof prepareWithSegments>, startY: number, lineHeight: number, width: number) {
-  let cursor: LayoutCursor = { segmentIndex: 0, graphemeIndex: 0 }
+/**
+ * @param {HTMLElement} target
+ * @param {ReturnType<typeof prepareWithSegments>} prepared
+ * @param {number} startY
+ * @param {number} lineHeight
+ * @param {number} width
+ */
+function renderStream(target, prepared, startY, lineHeight, width) {
+  /** @type {LayoutCursor} */
+  let cursor = { segmentIndex: 0, graphemeIndex: 0 }
   let y = startY
-  const fragments: string[] = []
+  const fragments = []
   while (true) {
     const slot = slotForBand(y, lineHeight, width)
     const line = layoutNextLine(prepared, cursor, Math.max(120, slot.width))
@@ -75,7 +88,7 @@ function render() {
   orb.style.transform = `translate(${orbX - 88}px, ${orbY - 88}px)`
 }
 
-function moveOrb(clientX: number, clientY: number) {
+function moveOrb(clientX, clientY) {
   const rect = canvas.getBoundingClientRect()
   orbX = Math.max(88, Math.min(rect.width - 88, clientX - rect.left))
   orbY = Math.max(88, Math.min(rect.height - 88, clientY - rect.top))

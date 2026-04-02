@@ -53,3 +53,12 @@ npm run cli -- <command>
 ```
 
 That path uses the current workspace build directly and avoids stale `npx` resolution.
+
+## The example still expects a build step
+
+The current examples and starters are static ESM packages.
+After `npm install`, use:
+
+```bash
+npm start
+```
