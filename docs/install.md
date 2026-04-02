@@ -14,7 +14,7 @@ Restart Codex after copying the skill.
 For local development, prefer the symlink installer instead:
 
 ```bash
-./scripts/install_symlink.sh
+python3 scripts/pretext_cli.py install-symlink
 ```
 
 That avoids copy drift and is the recommended setup if you want this repo to stay in sync with the installed skill.
@@ -24,7 +24,7 @@ That avoids copy drift and is the recommended setup if you want this repo to sta
 Run the bundled validator before installing or sharing:
 
 ```bash
-python3 scripts/validate_skill.py .
+python3 scripts/pretext_cli.py validate .
 ```
 
 This checks:
@@ -40,9 +40,9 @@ This checks:
 Generate each starter at least once:
 
 ```bash
-python3 scripts/new_pretext_demo.py --kind predictive-ui --title "Signal Bubbles" --out tmp/predictive-ui
-python3 scripts/new_pretext_demo.py --kind editorial-routing --title "Orbital Essay" --out tmp/editorial-routing
-python3 scripts/new_pretext_demo.py --kind kinetic-typography --title "Pulse Type" --out tmp/kinetic-typography
+python3 scripts/pretext_cli.py scaffold --kind predictive-ui --preset signal-bubbles --title "Signal Bubbles" --out tmp/predictive-ui
+python3 scripts/pretext_cli.py scaffold --kind editorial-routing --preset orbital-essay --title "Orbital Essay" --out tmp/editorial-routing
+python3 scripts/pretext_cli.py scaffold --kind kinetic-typography --preset pulse-type --title "Pulse Type" --out tmp/kinetic-typography
 ```
 
 Then build at least one of them:

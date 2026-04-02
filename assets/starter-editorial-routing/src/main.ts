@@ -1,7 +1,7 @@
 import { layoutNextLine, prepareWithSegments, type LayoutCursor } from '@chenglou/pretext'
 import './styles.css'
 
-const text = `The page should feel like a living editorial spread, not a template. A routed headline, a carved body column, and a moving circular obstacle create the point of view. Pretext computes each line against the available width so the story bends around the shape instead of pretending the shape is not there. Resize the page or move the circle and the geometry can be recomputed cleanly.`
+const text = `__BODY_TEXT__`
 
 const app = document.querySelector<HTMLDivElement>('#app')
 if (app === null) throw new Error('#app not found')
@@ -10,9 +10,9 @@ const root = document.createElement('main')
 root.className = 'page'
 root.innerHTML = `
   <section class="hero">
-    <p class="eyebrow">Editorial Routing</p>
+    <p class="eyebrow">__MODE_LABEL__</p>
     <h1>__DEMO_TITLE__</h1>
-    <p class="intro">Drag the orb. The paragraph reroutes line by line around the obstacle using Pretext geometry instead of DOM flow.</p>
+    <p class="intro">__INTRO__</p>
   </section>
   <section class="spread">
     <div class="column">

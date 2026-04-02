@@ -12,6 +12,17 @@ Use this workflow for every request:
 | 4 | Implement with Pretext | Prepare text once, relayout from cached geometry |
 | 5 | Validate | Check resize, mobile, motion, and hot-path measurement rules |
 
+## Author-Backed Non-Negotiables
+
+These come directly from the upstream `pretext` repo and should not be hand-waved away:
+
+- `prepare()` is the one-time pass. `layout()` is the cheap relayout path.
+- The whole point is to avoid DOM measurement in hot paths.
+- `layoutNextLine()` exists specifically for width-changing flows such as obstacles and routed columns.
+- `system-ui` is not safe for accuracy-critical measurement on macOS.
+
+See [../references/official-notes.md](../references/official-notes.md) for the condensed source-backed version.
+
 ## Mode Selection
 
 ### `predictive-ui`

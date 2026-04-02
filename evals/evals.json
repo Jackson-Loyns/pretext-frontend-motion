@@ -18,6 +18,24 @@
       "prompt": "Make a canvas-based kinetic typography poster where measured text reacts to pointer movement and settles back into its original line layout.",
       "expected_output": "A kinetic-typography demo where motion is anchored to Pretext-derived line or glyph positions rather than decorative-only animation.",
       "files": []
+    },
+    {
+      "id": "predictive-ui-masonry",
+      "prompt": "Build a compact editorial bulletin with masonry-like cards whose text heights are computed before layout. It should feel intentional and premium rather than like a dashboard.",
+      "expected_output": "A predictive-ui demo where card packing depends on Pretext layout results instead of post-render DOM measurement.",
+      "files": []
+    },
+    {
+      "id": "editorial-routing-pull-quote",
+      "prompt": "Create an article spread where a large circular pull quote interrupts the column and the body copy reroutes around it line by line.",
+      "expected_output": "An editorial-routing demo where obstacle-aware line layout is the central behavior and the composition still works on resize.",
+      "files": []
+    },
+    {
+      "id": "kinetic-type-ascii-ribbon",
+      "prompt": "Create a canvas poster where measured text anchors drive an animated ASCII ribbon field with restrained but obvious pointer interaction.",
+      "expected_output": "A kinetic-typography demo with a strong poster-like visual system and motion tied to Pretext-derived text structure.",
+      "files": []
     }
   ]
 }

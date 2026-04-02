@@ -1,5 +1,7 @@
 # Capabilities
 
+Use [official-notes.md](official-notes.md) when you need the short source-backed view of what the upstream author actually claims.
+
 ## Core Pretext APIs
 
 | API | Use it for | Notes |

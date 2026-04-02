@@ -1,16 +1,17 @@
 import { layoutWithLines, prepareWithSegments } from '@chenglou/pretext'
 import './styles.css'
 
-const phrase = '__DEMO_TITLE__\nTEXT WANTS MOTION'
+const phrase = `__PHRASE_LINE_1__
+__PHRASE_LINE_2__`
 const app = document.querySelector<HTMLDivElement>('#app')
 if (app === null) throw new Error('#app not found')
 
 app.innerHTML = `
   <main class="page">
     <section class="copy">
-      <p class="eyebrow">Kinetic Typography</p>
+      <p class="eyebrow">__MODE_LABEL__</p>
       <h1>__DEMO_TITLE__</h1>
-      <p>Move the pointer across the canvas. Glyphs drift away from the cursor and then settle back to measured anchors produced by Pretext.</p>
+      <p>__INTRO__</p>
     </section>
     <canvas id="canvas"></canvas>
   </main>

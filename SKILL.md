@@ -55,11 +55,12 @@ If the prompt spans multiple categories, pick the dominant mode and borrow secon
 
 ## Bundled Resources
 
+- Read `references/official-notes.md` when you need the upstream author position before making claims about Pretext.
 - Read `references/capabilities.md` when you need official API boundaries and limitations.
 - Read `references/patterns.md` when deciding how to structure a demo.
 - Read `references/design-rules.md` before touching visual direction or animation.
 - Read `references/react-migration.md` only when the user wants to port the starter into a React app.
-- Use `scripts/new_pretext_demo.py` to scaffold a starter from `assets/starter-*`.
+- Use `scripts/pretext_cli.py scaffold ...` to scaffold a starter from `assets/starter-*`.
 
 ## Validation Checklist
 

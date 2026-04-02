@@ -1,10 +1,10 @@
 # Pretext Frontend Motion
 
-`Pretext Frontend Motion` is a skill package for building frontend demos where text layout is the engine, not an afterthought.
+`Pretext Frontend Motion` is a Codex skill package for building frontend demos where text layout is the engine, not an afterthought.
 
-It is designed around [`@chenglou/pretext`](https://github.com/chenglou/pretext): a browser-side text measurement and line layout library that avoids DOM reflow in the hot path. The package focuses on visually strong demos, text-driven interaction, and layout systems that would be awkward or unstable with ordinary DOM measurement loops.
+It is built around [`@chenglou/pretext`](https://github.com/chenglou/pretext): a browser-side text measurement and line layout library that avoids DOM reflow in the hot path. This repo turns that library into a usable skill with strong defaults, runnable examples, CLI tooling, and author-backed guardrails.
 
-## What This Skill Does
+## What This Skill Covers
 
 | Capability | What it helps generate |
 | --- | --- |
@@ -14,72 +14,86 @@ It is designed around [`@chenglou/pretext`](https://github.com/chenglou/pretext)
 | Strong visual direction | Better type, stronger composition, more intentional motion |
 | Starter-first workflow | Copy a working starter, then adapt it instead of inventing boilerplate each time |
 
-## Why Use It
+## Official Basis
 
-- It keeps `Pretext` in the real measurement path instead of treating it as a decorative dependency.
-- It pushes output away from generic landing-page templates.
-- It gives both AI-facing execution rules and human-facing guidance.
-- It starts from `Vanilla TypeScript + Canvas` because that matches the strongest public Pretext demos.
+This repo follows the original `pretext` project rather than inventing its own rules.
 
-## Install
+- `prepare()` is the one-time work and `layout()` is the cheap hot path. Resize should usually rerun `layout()`, not `prepare()`.
+- The core value is avoiding DOM reads like `getBoundingClientRect()` and `offsetHeight` in the relayout path.
+- `layoutNextLine()`, `walkLineRanges()`, and `layoutWithLines()` are the right tools when text must route around geometry or drive Canvas rendering.
+- `system-ui` is called out upstream as unsafe for precision-critical layout on macOS.
+- The project is browser-first today. Server-side is discussed upstream, but not something this skill should overpromise by default.
 
-Clone or copy this skill into your Codex skills directory:
+Read the condensed source-backed notes in [references/official-notes.md](references/official-notes.md).
 
-```bash
-mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-cp -R /path/to/pretext "${CODEX_HOME:-$HOME/.codex}/skills/pretext-frontend-motion"
-```
+Primary upstream sources:
+- [pretext README](https://github.com/chenglou/pretext/blob/main/README.md)
+- [pretext RESEARCH.md](https://github.com/chenglou/pretext/blob/main/RESEARCH.md)
+- [pretext STATUS.md](https://github.com/chenglou/pretext/blob/main/STATUS.md)
 
-Restart Codex after installation so the skill can be discovered.
+## Fast Start
 
-For a step-by-step install and validation flow, see [`docs/install.md`](docs/install.md).
-For update strategies, including symlink-based local development and git-based upstream sync, see [`docs/update.md`](docs/update.md).
-
-## Quick Start
-
-Use the scaffold script to create a starter:
+Use the unified CLI:
 
 ```bash
-python3 scripts/new_pretext_demo.py \
-  --kind predictive-ui \
-  --title "Signal Bubbles" \
-  --out output/signal-bubbles
-```
-
-Then run the demo:
-
-```bash
+python3 scripts/pretext_cli.py list-kinds
+python3 scripts/pretext_cli.py list-presets --kind predictive-ui
+python3 scripts/pretext_cli.py scaffold --kind predictive-ui --preset signal-bubbles --title "Signal Bubbles" --out output/signal-bubbles
 cd output/signal-bubbles
 npm install
 npm run dev
 ```
 
-## Modes
+## CLI
 
-| Mode | Best for | Start here |
+| Goal | Command |
+| --- | --- |
+| List demo modes | `python3 scripts/pretext_cli.py list-kinds` |
+| List presets for one mode | `python3 scripts/pretext_cli.py list-presets --kind editorial-routing` |
+| Scaffold a runnable demo | `python3 scripts/pretext_cli.py scaffold --kind kinetic-typography --preset pointer-poster --title "Vector Choir" --out output/vector-choir` |
+| Validate this skill repo | `python3 scripts/pretext_cli.py validate .` |
+| Install into Codex via symlink | `python3 scripts/pretext_cli.py install-symlink` |
+| Update from git remote | `python3 scripts/pretext_cli.py update origin main` |
+
+For the full command guide, see [docs/cli.md](/Users/c14h14n3/Desktop/pretext/docs/cli.md).
+
+## Choose a Mode
+
+| Mode | Use it when | Primary APIs |
 | --- | --- | --- |
-| `predictive-ui` | Stable text UI and zero-CLS interactions | [`docs/guide.md`](docs/guide.md) |
-| `editorial-routing` | Obstacle-aware typography and multi-column layout | [`docs/guide.md`](docs/guide.md) |
-| `kinetic-typography` | Text as motion, texture, and geometry | [`docs/guide.md`](docs/guide.md) |
+| `predictive-ui` | You need stable text height before paint | `prepare`, `layout` |
+| `editorial-routing` | Text must bend around shapes or hand off across changing widths | `prepareWithSegments`, `layoutNextLine`, `walkLineRanges` |
+| `kinetic-typography` | Motion should derive from measured line or glyph structure | `prepareWithSegments`, `layoutWithLines` |
 
-## Example Prompts
+## Ready-Made Presets
 
-- Build a typography-heavy landing page where the hero text routes around floating shapes and reflows cleanly on resize.
-- Create a zero-CLS messaging demo with multilingual text bubbles and width-tight layouts.
-- Make a canvas-based ASCII poster that reacts to pointer movement and uses Pretext to place glyphs precisely.
-- Build an editorial spread with a multi-column article, a pull quote, and obstacle-aware headline placement.
+| Mode | Presets |
+| --- | --- |
+| `predictive-ui` | `signal-bubbles`, `tight-masonry`, `multilingual-feed` |
+| `editorial-routing` | `orbital-essay`, `pull-quote-spread`, `routed-manifesto` |
+| `kinetic-typography` | `pulse-type`, `ribbon-ascii`, `pointer-poster` |
 
-## Documentation
+## Example Requests
 
-- [`docs/install.md`](docs/install.md): install, validate, and smoke-test the skill
-- [`docs/update.md`](docs/update.md): keep the installed skill synced with this repo or an upstream repo
-- [`docs/guide.md`](docs/guide.md): workflow and mode selection
-- [`docs/design-rules.md`](docs/design-rules.md): visual and motion constraints
-- [`docs/examples.md`](docs/examples.md): prompt-to-output examples
-- [`references/capabilities.md`](references/capabilities.md): core API and limitations
-- [`references/patterns.md`](references/patterns.md): implementation patterns
-- [`references/design-rules.md`](references/design-rules.md): condensed AI-facing design rules
-- [`references/react-migration.md`](references/react-migration.md): porting guidance for React projects
+- Build a zero-CLS messaging wall where mixed-language bubbles know their height before render.
+- Create an editorial landing page where the headline and body copy reroute around a floating emblem.
+- Make a motion poster where the pointer disturbs measured text and the lines settle back into place.
+- Build a compact masonry bulletin where card height is driven by measured copy rather than DOM reflow.
+
+## Documentation Map
+
+- [docs/quick-reference.md](docs/quick-reference.md): when to use this skill, which mode to pick, and what commands to run
+- [docs/cli.md](docs/cli.md): CLI usage for this repo and the upstream `pretext` project
+- [docs/guide.md](docs/guide.md): workflow and delivery rules
+- [docs/design-rules.md](docs/design-rules.md): visual and motion constraints
+- [docs/examples.md](docs/examples.md): prompt-to-output examples and scaffold recipes
+- [docs/install.md](docs/install.md): install and local validation
+- [docs/update.md](docs/update.md): sync and update strategy
+- [references/official-notes.md](references/official-notes.md): direct notes from the original author repository
+- [references/capabilities.md](references/capabilities.md): API boundaries and practical limits
+- [references/patterns.md](references/patterns.md): implementation patterns
+- [references/design-rules.md](references/design-rules.md): condensed AI-facing design rules
+- [references/react-migration.md](references/react-migration.md): React porting guidance
 
 ## Directory Layout
 

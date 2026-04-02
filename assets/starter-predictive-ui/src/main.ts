@@ -2,9 +2,9 @@ import { layout, prepare } from '@chenglou/pretext'
 import './styles.css'
 
 const messages = [
-  'Measured before paint, not guessed after paint.',
-  'Multilingual bubbles stay compact without layout flash. 你好，مرحبا，hello.',
-  'Pretext gives the shell a stable height before the message ever lands on screen.',
+  `__MESSAGE_1__`,
+  `__MESSAGE_2__`,
+  `__MESSAGE_3__`,
 ]
 
 const app = document.querySelector<HTMLDivElement>('#app')
@@ -14,9 +14,9 @@ const shell = document.createElement('main')
 shell.className = 'page'
 shell.innerHTML = `
   <section class="hero">
-    <p class="eyebrow">Predictive UI</p>
+    <p class="eyebrow">__MODE_LABEL__</p>
     <h1>__DEMO_TITLE__</h1>
-    <p class="intro">A width-tight message wall with bubble heights predicted from Pretext instead of DOM measurement.</p>
+    <p class="intro">__INTRO__</p>
   </section>
   <section class="wall">
     <div class="controls">

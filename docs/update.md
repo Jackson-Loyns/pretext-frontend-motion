@@ -20,7 +20,7 @@ That gives you one source of truth instead of copying files around.
 Install the skill as a symlink:
 
 ```bash
-./scripts/install_symlink.sh
+python3 scripts/pretext_cli.py install-symlink
 ```
 
 This creates:
@@ -40,7 +40,7 @@ With that setup:
 If this repo has a configured remote, use:
 
 ```bash
-./scripts/update_from_git.sh
+python3 scripts/pretext_cli.py update origin main
 ```
 
 The script:
@@ -53,7 +53,7 @@ If you cloned from your own fork and want upstream updates too, add an upstream 
 
 ```bash
 git remote add upstream <upstream-repo-url>
-./scripts/update_from_git.sh upstream main
+python3 scripts/pretext_cli.py update upstream main
 ```
 
 ## Recommended Workflow
@@ -68,14 +68,3 @@ git remote add upstream <upstream-repo-url>
 ## Important Limitation
 
 Symlink install keeps files synced, but Codex may still need a restart before it definitely re-reads updated skill metadata or instructions. Treat restart as the safe reload step.
-
-## Template and Reference Status
-
-This repo already includes:
-
-- three starter templates in `assets/starter-*`
-- human-readable docs in `docs/`
-- AI-facing references in `references/`
-- scaffold and validation scripts in `scripts/`
-
-So the missing piece was update flow, not template coverage.

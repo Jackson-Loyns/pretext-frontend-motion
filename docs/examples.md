@@ -1,52 +1,77 @@
 # Examples
 
-## Prompt to Output Mapping
+## Prompt to Result Mapping
 
-| Prompt | Best mode | Expected result shape |
-| --- | --- | --- |
-| Build a zero-CLS text bubble demo for multilingual chat messages | `predictive-ui` | Measured bubble widths and heights, stable list layout, strong messaging visuals |
-| Make a magazine-style landing page where the headline wraps around floating marks | `editorial-routing` | Obstacle-aware hero, multi-band text slots, expressive editorial composition |
-| Create an ASCII poster with animated glyph particles that return to measured text positions | `kinetic-typography` | Canvas poster, particle field, measured glyph anchors, pointer interaction |
+| Prompt | Best mode | Suggested preset | Expected result shape | Core APIs |
+| --- | --- | --- | --- | --- |
+| Build a zero-CLS text bubble demo for multilingual chat messages | `predictive-ui` | `signal-bubbles` | Measured bubble widths and heights, stable list layout, strong messaging visuals | `prepare`, `layout` |
+| Build a compact bulletin where cards pack tightly around uneven copy lengths | `predictive-ui` | `tight-masonry` | Masonry-like text cards with stable heights and no reflow jitter | `prepare`, `layout` |
+| Make a magazine-style landing page where the headline wraps around floating marks | `editorial-routing` | `orbital-essay` | Obstacle-aware hero, visible routed text bands, editorial composition | `prepareWithSegments`, `layoutNextLine` |
+| Create a pull-quote spread where copy bends around a large circular quote mark | `editorial-routing` | `pull-quote-spread` | Routed article layout with compositional interruption | `prepareWithSegments`, `layoutNextLine` |
+| Create an ASCII poster with animated glyph particles that return to measured text positions | `kinetic-typography` | `ribbon-ascii` | Canvas poster, animated glyph field, pointer reaction | `prepareWithSegments`, `layoutWithLines` |
+| Make a motion poster where text gets pushed by the pointer and settles back into lines | `kinetic-typography` | `pointer-poster` | Kinetic canvas typography anchored to measured positions | `prepareWithSegments`, `layoutWithLines` |
 
-## Good Prompt Pattern
-
-Use prompts that combine product intent, visual intent, and text behavior.
-
-```text
-Build a typography-first landing page for an AI publishing tool.
-Use a warm editorial palette, dramatic serif display type, and animated floating shapes.
-The hero text should route around the shapes and reflow cleanly on resize.
-Use Pretext for the real text layout path.
-```
-
-## Weak Prompt Pattern
-
-Avoid vague requests like these:
-
-```text
-Make a nice page with Pretext.
-Add some cool animations.
-```
-
-These prompts do not define the visual direction or the text behavior.
-
-## Mode Examples
+## Scaffold Recipes
 
 ### Predictive UI
 
-```text
-Create a message wall where every card precomputes its text height before render.
-Make it feel premium, compact, and typography-led rather than like a normal dashboard.
+```bash
+python3 scripts/pretext_cli.py scaffold \
+  --kind predictive-ui \
+  --preset multilingual-feed \
+  --title "Measured Dispatch" \
+  --out output/measured-dispatch
 ```
+
+Use when the point is stable text sizing before paint.
 
 ### Editorial Routing
 
-```text
-Design a two-column story page with a routed headline, a pull quote, and body text that bends around circular artwork.
+```bash
+python3 scripts/pretext_cli.py scaffold \
+  --kind editorial-routing \
+  --preset routed-manifesto \
+  --title "Routed Manifesto" \
+  --out output/routed-manifesto
 ```
+
+Use when the point is line-by-line rerouting around geometry.
 
 ### Kinetic Typography
 
-```text
-Build a canvas-based kinetic typography experiment where the text distorts near the pointer but settles back into measured lines.
+```bash
+python3 scripts/pretext_cli.py scaffold \
+  --kind kinetic-typography \
+  --preset pointer-poster \
+  --title "Vector Choir" \
+  --out output/vector-choir
 ```
+
+Use when the point is motion derived from measured text structure.
+
+## Good Prompt Shape
+
+Use prompts that specify all three layers:
+
+1. product or content intent
+2. visual direction
+3. text behavior
+
+Example:
+
+```text
+Build a landing page for an AI publishing tool.
+Use a warm editorial palette, sharp serif display type, and a restrained motion system.
+The headline and deck should route around floating shapes and reflow cleanly on resize.
+Use Pretext in the real layout path instead of DOM measurement.
+```
+
+## Weak Prompt Shape
+
+Avoid prompts like this:
+
+```text
+Make a cool page with Pretext and some animations.
+```
+
+That does not define the visual language, the text behavior, or the actual role of Pretext.

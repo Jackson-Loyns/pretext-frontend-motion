@@ -12,16 +12,20 @@ REQUIRED_FILES = [
     "SKILL.md",
     "README.md",
     "agents/openai.yaml",
+    "docs/quick-reference.md",
+    "docs/cli.md",
     "docs/install.md",
     "docs/update.md",
     "docs/guide.md",
     "docs/design-rules.md",
     "docs/examples.md",
+    "references/official-notes.md",
     "references/capabilities.md",
     "references/patterns.md",
     "references/design-rules.md",
     "references/react-migration.md",
     "evals/evals.json",
+    "scripts/pretext_cli.py",
     "scripts/new_pretext_demo.py",
     "scripts/install_symlink.sh",
     "scripts/update_from_git.sh",
@@ -70,6 +74,7 @@ def main() -> int:
             errors.append("SKILL.md is missing frontmatter field: description")
 
     for rel in [
+        "scripts/pretext_cli.py",
         "scripts/new_pretext_demo.py",
         "scripts/install_symlink.sh",
         "scripts/update_from_git.sh",
