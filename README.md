@@ -1,18 +1,45 @@
 # Pretext Frontend Motion
 
-Pretext Frontend Motion is a multi-CLI installable bundle for text-driven frontend work:
-measured UI, routed editorial layout, and kinetic typography with strong visual direction.
+Pretext Frontend Motion is a multi-CLI installable bundle for assistants that need to build text-driven frontend work with real measurement logic, stronger visual direction, and motion tied to text geometry.
 
-It is designed to help assistants generate better frontend style and motion, not just call Pretext APIs mechanically.
+It is based on the official Pretext demos by Cheng Lou and on the upstream repository:
 
-## What It Solves
+- Demo site: [https://chenglou.me/pretext/](https://chenglou.me/pretext/)
+- Source repository: [https://github.com/chenglou/pretext](https://github.com/chenglou/pretext)
 
-- installable bundles for multiple assistants and CLIs
-- AI-facing rules for stronger typography, layout, and motion
-- runnable example families instead of abstract placeholder templates
-- contribution flow for bugs, forks, and PRs
+## When To Use This Bundle
 
-## Supported Assistants / CLIs
+Use it when the request is about one of these jobs:
+
+- width-tight multiline UI
+- routed editorial layout
+- kinetic typography on canvas
+- measured card heights or accordion panels
+- mixed inline layout that should stay in the Pretext measurement path
+
+Do not use it when Pretext is only decorative or when ordinary DOM layout is enough.
+
+## Quick Start
+
+Inside this repository, use the workspace command so the current build is always used:
+
+```bash
+npm install
+npm run build
+npm run cli -- init codex --force
+npm run cli -- init claude-code --force
+npm run cli -- doctor
+```
+
+For a packaged install flow, the public command stays:
+
+```bash
+npx pretext-skill init claude-code --force
+```
+
+If the target assistant is already open, restart it after install or update.
+
+## Supported Targets
 
 | Target | Install location |
 | --- | --- |
@@ -28,13 +55,15 @@ It is designed to help assistants generate better frontend style and motion, not
 | Qoder | `~/.qoder/skills/pretext-frontend-motion` |
 | Kiro | `~/.kiro/steering/pretext-frontend-motion` |
 | Trae | `~/.trae/skills/pretext-frontend-motion` |
-| Antigravity / Generic Agent | `~/.agents/skills/pretext-frontend-motion` |
+| Antigravity | `~/.agents/skills/pretext-frontend-motion` |
 
-Platform metadata lives in [platforms](platforms). Platform notes for humans live in [docs/platforms](docs/platforms).
+Preferred target names follow the real tool name: `claude-code`, `gemini-cli`, `github-copilot`, `roo-code`.
 
-## Official Demo Coverage
+## Official Demo Families
 
-| Official demo | Status here | Primary APIs |
+This bundle is organized around the official demo families, not around vague style labels.
+
+| Demo family | Status here | Primary APIs |
 | --- | --- | --- |
 | Accordion | Runnable example | `prepare`, `layout` |
 | Bubbles | Runnable example | `prepare`, `layout` |
@@ -45,72 +74,29 @@ Platform metadata lives in [platforms](platforms). Platform notes for humans liv
 | Rich Text | Blueprint + prompt recipe | `prepareWithSegments`, `layoutWithLines` |
 | Masonry | Runnable example | `prepare`, `layout` |
 
-See [docs/official-demos.md](docs/official-demos.md).
+See [docs/official-demos.md](docs/official-demos.md) for the full mapping.
 
-## Quick Install
-
-Local repo usage:
-
-```bash
-npm install
-npm run build
-npm run cli -- versions
-npm run cli -- init codex --force
-npm run cli -- init claude-code --force
-```
-
-Batch install:
-
-```bash
-npx pretext-skill init all --force
-```
-
-Preferred target names follow the actual CLI or assistant name:
-`claude-code`, `gemini-cli`, `github-copilot`, `roo-code`.
-Short aliases still work for compatibility, but the docs now prefer the real names.
-Inside this repo, prefer `npm run cli -- ...` so the current workspace build is used directly.
-
-## Command Table
+## Commands
 
 | Goal | Command |
 | --- | --- |
-| Install one target from this repo | `npm run cli -- init codex --force` |
-| Install Claude Code from this repo | `npm run cli -- init claude-code --force` |
-| Install Gemini CLI from this repo | `npm run cli -- init gemini-cli --force` |
-| Install all targets from this repo | `npm run cli -- init all --force` |
-| Update installed targets from this repo | `npm run cli -- update --offline --force` |
-| Show package versions from this repo | `npm run cli -- versions` |
-| Inspect local install state from this repo | `npm run cli -- doctor` |
+| Show versions | `npm run cli -- versions` |
+| Install one target | `npm run cli -- init claude-code --force` |
+| Install all targets | `npm run cli -- init all --force` |
+| Update installed targets | `npm run cli -- update --offline --force` |
+| Check install state | `npm run cli -- doctor` |
 
-If a target assistant is already open, restart it after install or update so it reloads the bundle.
-
-## Repo Layout
-
-```text
-core/          shared installable content
-platforms/     platform install metadata
-packages/cli/  Node.js + TypeScript installer CLI
-docs/          user-facing documentation
-```
-
-## Documentation
+## Read Next
 
 - [docs/quick-reference.md](docs/quick-reference.md)
 - [docs/cli.md](docs/cli.md)
 - [docs/official-demos.md](docs/official-demos.md)
 - [docs/examples.md](docs/examples.md)
-- [docs/platforms](docs/platforms)
 - [docs/troubleshooting.md](docs/troubleshooting.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## Current Constraints
+## Notes
 
-- The installer is usable from the repo today after `npm install && npm run build`.
-- The bundle is browser-first.
-- Fonts still need deliberate selection; see the installed `references/font-strategy.md`.
-
-## Reporting Issues And Contributing
-
-- Report installer, recognition, style, or example problems through the issue flow in [CONTRIBUTING.md](CONTRIBUTING.md).
-- Use the included bug report template under [.github/ISSUE_TEMPLATE](.github/ISSUE_TEMPLATE).
-- Fork and open a PR when fixing install paths, bundle content, examples, or docs.
+- This bundle is browser-first.
+- Pretext stays in the actual layout path.
+- The installed references include font and design rules because generic fonts and generic motion produce weak results.

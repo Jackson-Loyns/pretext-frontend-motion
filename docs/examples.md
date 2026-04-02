@@ -1,49 +1,29 @@
-# Examples
+# Example Requests
 
-## Runnable Official Families
+Use these as request patterns for assistants. Each one maps directly to an official Pretext family.
 
-### Accordion
+## Runnable Families
 
-```text
-Build an accordion where panel copy height is predicted with Pretext before expansion, so the layout stays stable and the transition does not guess from DOM reads.
-```
-
-### Bubbles
-
-```text
-Create a multilingual message surface with tight multiline bubbles. Use Pretext so each bubble knows its text height before paint and the layout stays compact.
-```
-
-### Dynamic Layout
-
-```text
-Build a fixed-height editorial spread where text reroutes around a moving obstacle. Use `layoutNextLine()` to recalculate each line against the available slot.
-```
-
-### Variable Typographic ASCII
-
-```text
-Make a canvas ASCII poster where measured lines create proportional anchor positions and the glyph field reacts to the pointer before settling back.
-```
-
-### Editorial Engine
-
-```text
-Create an editorial engine demo with moving circular geometry, a pull quote, and multi-column text reflow with no DOM text measurement in the relayout path.
-```
-
-### Masonry
-
-```text
-Build a masonry-like bulletin where card height prediction comes from Pretext and the packing stays stable with mixed-length copy.
-```
+| Demo family | Use this when the request sounds like | Start from |
+| --- | --- | --- |
+| Accordion | "Build an accordion where panel copy height is predicted before expansion so the transition stays stable." | `core/bundle/examples/accordion` |
+| Bubbles | "Create a multilingual messaging surface with tight multiline bubbles and no wasted vertical space." | `core/bundle/examples/bubbles` |
+| Dynamic Layout | "Build a fixed-height editorial spread where text reroutes around a moving obstacle." | `core/bundle/examples/dynamic-layout` |
+| Variable Typographic ASCII | "Make a canvas ASCII poster where measured lines drive a reactive glyph field." | `core/bundle/examples/variable-typographic-ascii` |
+| Editorial Engine | "Create an editorial engine demo with moving geometry, a pull quote, and multi-column reflow." | `core/bundle/examples/editorial-engine` |
+| Masonry | "Build a text-card bulletin board where card heights are predicted before packing." | `core/bundle/examples/masonry` |
 
 ## Blueprint Families
 
-### Justification Comparison
+| Demo family | Use this when the request sounds like | Start from |
+| --- | --- | --- |
+| Justification Comparison | "Compare paragraph layout strategies and show the line-breaking tradeoffs clearly." | `core/bundle/blueprints/justification-comparison.md` |
+| Rich Text | "Lay out links, chips, code spans, and inline text in one measured flow." | `core/bundle/blueprints/rich-text.md` |
 
-Use when the request is about paragraph layout tradeoffs instead of a single poster-like demo.
+## What Good Requests Usually Include
 
-### Rich Text
-
-Use when the request is about mixed inline content such as links, chips, and code spans flowing together.
+- the official family or a clear visual equivalent
+- the surface type: panel, chat, editorial spread, poster, grid
+- whether the output is DOM-first or canvas-first
+- the visual direction: restrained editorial, bold poster, kinetic field, compact utility UI
+- the interaction model: hover, resize, pointer, scroll, drag

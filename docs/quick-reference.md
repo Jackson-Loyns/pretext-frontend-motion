@@ -1,47 +1,57 @@
 # Quick Reference
 
-## Use This Bundle When
+## Start Here
 
-- the request clearly matches one of the official Pretext demos
-- text measurement is the point, not a detail
-- the layout must avoid DOM text measurement in the hot path
-- motion is driven by text geometry rather than decorative animation
+This bundle follows the official Pretext sample set by Cheng Lou:
 
-## Pick The Official Demo Family First
+- Demo site: [https://chenglou.me/pretext/](https://chenglou.me/pretext/)
+- Source repository: [https://github.com/chenglou/pretext](https://github.com/chenglou/pretext)
 
-| If the request sounds like... | Pick |
+Pick the official demo family first. Then start from the matching bundled example or blueprint.
+
+## Choose The Demo Family
+
+| Request pattern | Demo family |
 | --- | --- |
-| expandable sections with known text height | Accordion |
-| tight multiline chat bubbles | Bubbles |
-| routed text around shapes | Dynamic Layout |
-| animated editorial spread with live reflow | Editorial Engine |
-| ASCII / canvas poster with measured text anchors | Variable Typographic ASCII |
-| card grid with predicted heights | Masonry |
-| comparison of paragraph layout strategies | Justification Comparison |
+| expandable sections with measured panel height | Accordion |
+| compact multiline chat or speech bubbles | Bubbles |
+| text routed around shapes or moving obstacles | Dynamic Layout |
+| moving editorial spread, pull quote, live reflow | Editorial Engine |
+| measured ASCII poster or glyph field on canvas | Variable Typographic ASCII |
+| text-card grid with predicted height | Masonry |
+| compare paragraph layout choices | Justification Comparison |
 | mixed inline pills, links, and text | Rich Text |
 
-## Install Fast
+## Use These Commands
+
+Inside this repo:
 
 ```bash
 npm install
 npm run build
-npx pretext-skill init --ai codex --offline --force
+npm run cli -- init claude-code --force
+npm run cli -- doctor
 ```
 
-## Main Commands
+Packaged usage:
 
 ```bash
-npx pretext-skill init --ai cursor --offline --force
-npx pretext-skill init --ai all --offline --force
-npx pretext-skill update --offline --force
-npx pretext-skill versions
-npx pretext-skill doctor
+npx pretext-skill init claude-code --force
 ```
 
-## Non-Negotiables
+## Keep These Rules
 
-- `prepare()` is one-time work.
-- `layout()` is the relayout hot path.
-- `prepareWithSegments()` is the route into manual line layout.
-- DOM text measurement is not allowed in the relayout hot path.
-- named fonts are required when line accuracy matters.
+- `prepare()` is setup work, not a per-frame operation.
+- `layout()` is the cheap relayout path.
+- `prepareWithSegments()` is the route into manual line logic.
+- `layoutNextLine()` is for routed editorial flow.
+- `layoutWithLines()` is for canvas and richer line control.
+- `walkLineRanges()` is for width probing and comparison work.
+- Do not use DOM text measurement in the relayout hot path.
+- Use named fonts when line precision matters.
+
+## Read Next
+
+- [docs/cli.md](cli.md)
+- [docs/official-demos.md](official-demos.md)
+- [docs/examples.md](examples.md)

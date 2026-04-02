@@ -1,84 +1,66 @@
 # CLI Guide
 
-## Overview
+## Use The Workspace Command During Development
 
-The installer CLI lives in `packages/cli` and is exposed locally as `pretext-skill`
-after running `npm install && npm run build` in the repo root.
-Inside this repo, prefer `npm run cli -- ...` so you always execute the current workspace build.
+Inside this repository, prefer:
 
-## Commands
+```bash
+npm run cli -- <command>
+```
 
-| Command | What it does |
+That uses the current workspace build directly.
+
+For packaged usage outside the repo, use:
+
+```bash
+npx pretext-skill <command>
+```
+
+## Main Commands
+
+| Goal | Command |
 | --- | --- |
-| `npx pretext-skill init <target> --force` | install one target from bundled assets |
-| `npx pretext-skill init all --force` | install every supported target |
-| `npx pretext-skill update --offline --force` | refresh all installed targets from bundled assets |
-| `npx pretext-skill versions` | print CLI and bundle version |
-| `npx pretext-skill doctor` | inspect install paths and install state |
+| Show versions | `npm run cli -- versions` |
+| Install one target | `npm run cli -- init claude-code --force` |
+| Install all targets | `npm run cli -- init all --force` |
+| Update installed targets | `npm run cli -- update --offline --force` |
+| Check install state | `npm run cli -- doctor` |
 
-Repo-local equivalents:
+## Preferred Target Names
 
-| Command | What it does |
-| --- | --- |
-| `npm run cli -- init <target> --force` | install one target from the current workspace |
-| `npm run cli -- init all --force` | install every supported target from the current workspace |
-| `npm run cli -- update --offline --force` | refresh installs from the current workspace |
-| `npm run cli -- versions` | print CLI and bundle version from the current workspace |
-| `npm run cli -- doctor` | inspect install state using the current workspace build |
+Use the real assistant or CLI name in commands:
 
-## Supported target values
-
-Preferred target values:
-
-- `antigravity`
 - `claude-code`
 - `codex`
+- `cursor`
+- `windsurf`
+- `gemini-cli`
+- `opencode`
 - `continue`
 - `github-copilot`
-- `cursor`
-- `gemini-cli`
-- `kiro`
-- `opencode`
-- `qoder`
 - `roo-code`
+- `qoder`
+- `kiro`
 - `trae`
-- `windsurf`
+- `antigravity`
 - `all`
 
-Accepted compatibility aliases:
+Compatibility aliases still work, but they are not the preferred names in the docs.
 
-- `claude`
-- `claudecode`
-- `copilot`
-- `gemini`
-- `open-code`
-- `roocode`
-
-## Options
-
-| Option | Meaning |
-| --- | --- |
-| `--offline` | use bundled assets only |
-| `--force` | overwrite an existing install path |
-
-## Local Workflow
+## Local Flow
 
 ```bash
 npm install
 npm run build
 npm run cli -- versions
-npm run cli -- init codex --force
 npm run cli -- init claude-code --force
-npm run cli -- init github-copilot --force
 npm run cli -- doctor
 ```
 
-## Update Workflow
+## Update Flow
 
 ```bash
-npx pretext-skill update --offline --force
+npm run cli -- update --offline --force
 ```
-
-This refreshes all already-installed targets that exist under your home directory.
 
 Restart the target assistant after install or update so it reloads the bundle.
