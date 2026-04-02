@@ -1,24 +1,32 @@
 # Install
 
-## Local Repo Setup
+## Local Repository Workflow
+
+Use this flow when you are working from this repository:
 
 ```bash
 npm install
 npm run build
+npm run cli -- versions
 ```
 
-After the build, the local workspace exposes the `pretext-skill` binary through `npx`.
-Inside the repo, prefer `npm run cli -- ...` so the current workspace build is used directly.
+Inside the repo, prefer `npm run cli -- ...` so the current workspace build is always used directly.
 
-## Install One Target
+## Install One Platform
+
+Use the real assistant or CLI name:
 
 ```bash
 npm run cli -- init codex --force
+npm run cli -- init claude-code --force
+npm run cli -- init cursor --force
+npm run cli -- init gemini-cli --force
+npm run cli -- init github-copilot --force
 ```
 
-Replace `codex` with any supported target from [cli.md](cli.md).
+The full platform list lives in [cli.md](cli.md).
 
-## Install Every Target
+## Install Every Platform
 
 ```bash
 npm run cli -- init all --force
@@ -27,10 +35,26 @@ npm run cli -- init all --force
 ## Verify
 
 ```bash
-npm run cli -- versions
 npm run cli -- doctor
 ```
 
 The installer writes a `.pretext-install.json` manifest inside each installed bundle.
 
-Bundled examples and generated starters run with `npm start` after `npm install`.
+## Package The CLI
+
+This repo can generate an npm tarball for the CLI:
+
+```bash
+npm run pack
+```
+
+That validates the package boundary through `npm pack`. It does not publish to npm by itself.
+
+## Example Runtime
+
+Bundled examples and generated starters are static ESM packages.
+After `npm install`, run them with:
+
+```bash
+npm start
+```

@@ -7,6 +7,7 @@ Each runnable example is a static ESM package:
 - it depends directly on the official `@chenglou/pretext` npm package
 - it uses the package's own exported type definitions
 - it runs with `npm install` and `npm start`
+- it can be steered with the bundled style profiles in `references/style-profiles.md`
 
 | Demo family | Folder | APIs | Use it for |
 | --- | --- | --- | --- |

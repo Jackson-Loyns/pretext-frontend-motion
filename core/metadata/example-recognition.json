@@ -27,7 +27,7 @@
     },
     {
       "family": "variable-typographic-ascii",
-      "triggerPhrases": ["ascii poster", "glyph field", "text particles", "canvas typography"],
+      "triggerPhrases": ["ascii poster", "glyph field", "text particles", "canvas typography", "signal field", "algo qq", "sparse white field", "data cloud"],
       "apis": ["prepareWithSegments", "layoutWithLines"]
     },
     {

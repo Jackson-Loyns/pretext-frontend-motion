@@ -12,6 +12,7 @@ Good prompts specify:
 - typography-first
 - poster-like
 - editorial
+- technical-lab white field
 - severe or atmospheric palette
 - asymmetrical composition
 - motion tied to line geometry or glyph anchors
@@ -41,6 +42,10 @@ Build a fixed-height editorial spread where the headline and body reroute around
 ### Variable Typographic ASCII
 
 Create a canvas-based ASCII poster where measured lines provide anchor positions and the glyph field reacts to the pointer before settling back into place.
+
+### Technical Lab White
+
+Create a near-white technical landing scene inspired by sparse algorithm visualization rather than a SaaS hero. Use `prepareWithSegments()` and `layoutWithLines()` so the main word or phrase is built from measured glyph anchors, while small peripheral labels drift across the field. Keep the typography restrained, airy, and precise. Avoid centered startup-template composition, oversized gradient blobs, or warm editorial paper styling.
 
 ### Editorial Engine
 

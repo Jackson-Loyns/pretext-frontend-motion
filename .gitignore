@@ -6,3 +6,4 @@ output/
 __pycache__/
 *.pyc
 packages/cli/assets/
+*.tgz

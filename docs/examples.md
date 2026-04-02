@@ -28,5 +28,13 @@ They no longer require Vite or a build step before local preview.
 - the official family or a clear visual equivalent
 - the surface type: panel, chat, editorial spread, poster, grid
 - whether the output is DOM-first or canvas-first
-- the visual direction: restrained editorial, bold poster, kinetic field, compact utility UI
+- the style profile: editorial-paper, technical-lab-white, kinetic-dark-poster, compact-measured-ui
 - the interaction model: hover, resize, pointer, scroll, drag
+
+## Preset Ideas
+
+These starter presets are now available through the CLI:
+
+- `predictive-ui`: `signal-bubbles`, `tight-masonry`, `multilingual-feed`, `lab-signal-board`, `gallery-ribbon`
+- `editorial-routing`: `orbital-essay`, `pull-quote-spread`, `routed-manifesto`, `paper-atlas`, `lab-schematic`
+- `kinetic-typography`: `pulse-type`, `ribbon-ascii`, `pointer-poster`, `algo-signal-field`, `ivory-data-cloud`, `infrared-poster`

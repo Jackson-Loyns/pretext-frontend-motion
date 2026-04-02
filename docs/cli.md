@@ -26,6 +26,7 @@ npx pretext-skill <command>
 | Update installed targets | `npm run cli -- update --offline --force` |
 | Check install state | `npm run cli -- doctor` |
 | Scaffold a starter | `npm run cli -- scaffold --kind predictive-ui --out demo` |
+| List starter presets | `npm run cli -- list-presets --kind kinetic-typography` |
 | Validate the repo | `npm run cli -- validate .` |
 
 ## Preferred Target Names
@@ -56,6 +57,8 @@ npm install
 npm run build
 npm run cli -- versions
 npm run cli -- init claude-code --force
+npm run cli -- list-presets --kind kinetic-typography
+npm run cli -- scaffold --kind kinetic-typography --preset algo-signal-field --out demo
 npm run cli -- doctor
 ```
 

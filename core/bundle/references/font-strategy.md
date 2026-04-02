@@ -24,6 +24,29 @@ Prefer one of these strategies:
 | Modern premium | Sora, Manrope, Neue Montreal-like alternatives | Inter, Source Sans 3 |
 | Experimental poster | Space Grotesk, Archivo, Bebas Neue | IBM Plex Sans, IBM Plex Mono |
 | Technical / ASCII / code-poetry | IBM Plex Mono, Geist Mono | Inter, IBM Plex Sans |
+| Technical / lab white | Sora, IBM Plex Sans, Helvetica Neue-like families | IBM Plex Sans, Inter, Source Sans 3 |
+
+## Style profile notes
+
+### `editorial-paper`
+
+- display face can be visibly expressive
+- body face can stay classical and readable
+
+### `technical-lab-white`
+
+- avoid heavy serif display type
+- prefer crisp sans-serif or restrained mono accents
+- use mono sparingly for satellite labels, not for the main wordmark unless the prompt asks for it
+- suitable pairings:
+  - Sora + IBM Plex Sans
+  - Space Grotesk + Inter
+  - IBM Plex Sans + IBM Plex Sans
+
+### `kinetic-dark-poster`
+
+- display face can be louder
+- body face should still stay legible against motion-heavy backgrounds
 
 ## Constraints
 

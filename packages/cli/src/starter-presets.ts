@@ -29,6 +29,20 @@ export const STARTER_PRESETS: StarterPresetMap = {
       '__MESSAGE_2__': 'Prepared text handles keep resize cheap even when the feed gets dense.',
       '__MESSAGE_3__': 'Stable heights make scroll anchoring and virtualization less fragile.',
     },
+    'lab-signal-board': {
+      '__MODE_LABEL__': 'Predictive UI',
+      '__INTRO__': 'A near-white signal board with airy labels, measured notes, and compact text blocks that stay stable as the width changes.',
+      '__MESSAGE_1__': 'Sparse technical labels should still align to measured text geometry, not guessed DOM height.',
+      '__MESSAGE_2__': 'Keep the field light, crisp, and data-lab oriented rather than dashboard-generic.',
+      '__MESSAGE_3__': 'Use typography density as the visual rhythm instead of dark cards and obvious chrome.',
+    },
+    'gallery-ribbon': {
+      '__MODE_LABEL__': 'Predictive UI',
+      '__INTRO__': 'A boutique content ribbon where compact text modules feel curated, warm, and measured rather than app-like.',
+      '__MESSAGE_1__': 'Small copy modules can still feel editorial when line count is known before the shell settles.',
+      '__MESSAGE_2__': 'The spacing should feel composed, not auto-generated.',
+      '__MESSAGE_3__': 'Warm neutrals, measured copy, and restrained hierarchy create the tone.',
+    },
   },
   'editorial-routing': {
     'orbital-essay': {
@@ -45,6 +59,16 @@ export const STARTER_PRESETS: StarterPresetMap = {
       '__MODE_LABEL__': 'Editorial Routing',
       '__INTRO__': 'A manifesto style page where the body copy keeps its cadence while geometry cuts through the column.',
       '__BODY_TEXT__': 'Manifesto pages work when their structure is forceful but still legible. The obstacle here is not decoration. It is a compositional pressure point. Pretext lays out each next line against the available slot, which lets the block keep moving with intent as the circle shifts, the viewport changes, and the column width tightens on smaller screens.',
+    },
+    'paper-atlas': {
+      '__MODE_LABEL__': 'Editorial Routing',
+      '__INTRO__': 'A warm paper atlas spread where text curves around a circular annotation and keeps its cadence across the page.',
+      '__BODY_TEXT__': 'The result should feel like a designed spread from an exhibition catalogue. The routed body text is the composition tool, not merely a technical trick. Use measured lines to keep a stable reading rhythm while the circle behaves like a printed annotation or map marker drifting through the column.',
+    },
+    'lab-schematic': {
+      '__MODE_LABEL__': 'Editorial Routing',
+      '__INTRO__': 'A near-white technical schematic where text routes around a moving node without turning into a template hero section.',
+      '__BODY_TEXT__': 'The page should feel sparse, precise, and almost infrastructural. Small satellite labels, a measured headline, and routed explanatory text need to work together like a technical diagram rather than a marketing page. The moving node is a signal source, so each recomputed line should reinforce the feeling of a dynamic information field.',
     },
   },
   'kinetic-typography': {
@@ -65,6 +89,24 @@ export const STARTER_PRESETS: StarterPresetMap = {
       '__INTRO__': 'A motion poster where the pointer bends the measured text cloud without destroying the underlying line layout.',
       '__PHRASE_LINE_1__': '__DEMO_TITLE__',
       '__PHRASE_LINE_2__': 'POINTER DRIVEN POSTER',
+    },
+    'algo-signal-field': {
+      '__MODE_LABEL__': 'Kinetic Typography',
+      '__INTRO__': 'A near-white technical field where a large measured word emerges from drifting micro-labels and signal noise.',
+      '__PHRASE_LINE_1__': '__DEMO_TITLE__',
+      '__PHRASE_LINE_2__': 'SIGNAL FIELD',
+    },
+    'ivory-data-cloud': {
+      '__MODE_LABEL__': 'Kinetic Typography',
+      '__INTRO__': 'An airy ivory surface where measured glyph anchors create a quiet cloud of small labels around a central phrase.',
+      '__PHRASE_LINE_1__': '__DEMO_TITLE__',
+      '__PHRASE_LINE_2__': 'DATA CLOUD',
+    },
+    'infrared-poster': {
+      '__MODE_LABEL__': 'Kinetic Typography',
+      '__INTRO__': 'A dark poster with higher contrast, stronger glow, and measured glyph motion that feels more cinematic than editorial.',
+      '__PHRASE_LINE_1__': '__DEMO_TITLE__',
+      '__PHRASE_LINE_2__': 'INFRARED POSTER',
     },
   },
 }

@@ -1,0 +1,28 @@
+{
+  "profiles": [
+    {
+      "id": "editorial-paper",
+      "summary": "Warm paper, serif-led hierarchy, asymmetrical spread, calmer motion.",
+      "families": ["dynamic-layout", "editorial-engine", "masonry"],
+      "triggerPhrases": ["editorial", "paper", "essay spread", "manifesto", "exhibition"]
+    },
+    {
+      "id": "technical-lab-white",
+      "summary": "Near-white field, sparse technical labels, central measured word or glyph cloud, restrained accents.",
+      "families": ["variable-typographic-ascii", "dynamic-layout", "bubbles"],
+      "triggerPhrases": ["algo qq", "algorithm field", "signal map", "technical lab", "sparse white"]
+    },
+    {
+      "id": "kinetic-dark-poster",
+      "summary": "Dark field, louder display type, stronger glow, motion-heavy glyph work.",
+      "families": ["variable-typographic-ascii", "editorial-engine"],
+      "triggerPhrases": ["dark poster", "cinematic typography", "glow", "motion poster"]
+    },
+    {
+      "id": "compact-measured-ui",
+      "summary": "Utility-first measured cards, bubbles, accordions, compact modular surfaces.",
+      "families": ["accordion", "bubbles", "masonry"],
+      "triggerPhrases": ["compact feed", "measured cards", "tight ui", "bubble wall"]
+    }
+  ]
+}
