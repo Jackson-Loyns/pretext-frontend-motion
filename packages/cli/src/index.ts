@@ -43,6 +43,45 @@ type InstallRecord = {
 const SHARED_FRONTMATTER_DESCRIPTION =
   'Build bold text-driven frontend demos across Accordion, Bubbles, Dynamic Layout, Variable Typographic ASCII, Editorial Engine, Justification Comparison, Rich Text, and Masonry. Use when the request needs strong frontend style, intentional typography, routed text layout, width-tight multiline UI, or kinetic typography driven by real Pretext measurement instead of DOM text reads.'
 
+const PLATFORM_ALIASES: Record<string, string> = {
+  antigravity: 'antigravity',
+  claude: 'claude',
+  'claude-code': 'claude',
+  claudecode: 'claude',
+  codex: 'codex',
+  continue: 'continue',
+  copilot: 'copilot',
+  'github-copilot': 'copilot',
+  cursor: 'cursor',
+  gemini: 'gemini',
+  'gemini-cli': 'gemini',
+  kiro: 'kiro',
+  opencode: 'opencode',
+  'open-code': 'opencode',
+  qoder: 'qoder',
+  roocode: 'roocode',
+  'roo-code': 'roocode',
+  trae: 'trae',
+  windsurf: 'windsurf',
+  all: 'all',
+}
+
+const PREFERRED_TARGETS: Record<string, string> = {
+  antigravity: 'antigravity',
+  claude: 'claude-code',
+  codex: 'codex',
+  continue: 'continue',
+  copilot: 'github-copilot',
+  cursor: 'cursor',
+  gemini: 'gemini-cli',
+  kiro: 'kiro',
+  opencode: 'opencode',
+  qoder: 'qoder',
+  roocode: 'roo-code',
+  trae: 'trae',
+  windsurf: 'windsurf',
+}
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -72,7 +111,7 @@ function main(): void {
 
 function parseOptions(args: string[]): CliOptions {
   const options: CliOptions = {
-    offline: false,
+    offline: true,
     force: false,
   }
 
@@ -91,6 +130,10 @@ function parseOptions(args: string[]): CliOptions {
       index += 1
       continue
     }
+    if (!arg.startsWith('-') && options.ai === undefined) {
+      options.ai = arg
+      continue
+    }
     throw new Error(`Unknown option: ${arg}`)
   }
 
@@ -101,11 +144,27 @@ function printHelp(): void {
   console.log(`pretext-skill
 
 Usage:
-  pretext-skill init --ai <target> [--offline] [--force]
-  pretext-skill init --ai all [--offline] [--force]
+  pretext-skill init <target> [--force]
+  pretext-skill init --ai <target> [--force]
+  pretext-skill init all [--force]
   pretext-skill update [--offline] [--force]
   pretext-skill versions
   pretext-skill doctor
+
+Preferred targets:
+  codex
+  claude-code
+  cursor
+  windsurf
+  gemini-cli
+  opencode
+  continue
+  github-copilot
+  roo-code
+  qoder
+  kiro
+  trae
+  antigravity
 `)
 }
 
@@ -126,7 +185,8 @@ function printDoctor(): void {
     const installPath = getInstallPath(platform)
     const manifestPath = path.join(installPath, '.pretext-install.json')
     const status = existsSync(installPath) ? 'installed' : 'missing'
-    console.log(`- ${platform.platform}: ${status} -> ${installPath}`)
+    const preferredTarget = getPreferredTarget(platform.platform)
+    console.log(`- ${preferredTarget} (${platform.displayName}): ${status} -> ${installPath}`)
     if (existsSync(manifestPath)) {
       const manifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as InstallRecord
       console.log(`  version=${manifest.version} installedAt=${manifest.installedAt}`)
@@ -140,9 +200,10 @@ function initInstall(target: string, options: CliOptions): void {
     console.log('Using bundled assets only.')
   }
 
-  const selected = target === 'all'
+  const normalizedTarget = normalizeTarget(target)
+  const selected = normalizedTarget === 'all'
     ? platforms
-    : platforms.filter(platform => platform.platform === target)
+    : platforms.filter(platform => platform.platform === normalizedTarget)
 
   if (selected.length === 0) {
     throw new Error(`Unsupported platform: ${target}`)
@@ -151,6 +212,16 @@ function initInstall(target: string, options: CliOptions): void {
   for (const platform of selected) {
     installPlatform(platform, options.force)
   }
+}
+
+function normalizeTarget(target: string): string {
+  const normalized = PLATFORM_ALIASES[target.toLowerCase()]
+  if (normalized !== undefined) return normalized
+  return target.toLowerCase()
+}
+
+function getPreferredTarget(platform: string): string {
+  return PREFERRED_TARGETS[platform] ?? platform
 }
 
 function updateInstalled(options: CliOptions): void {

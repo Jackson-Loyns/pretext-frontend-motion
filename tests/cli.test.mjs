@@ -33,6 +33,18 @@ test('init installs a platform bundle', () => {
   }
 })
 
+test('init accepts assistant aliases like claude-code', () => {
+  const home = mkdtempSync(path.join(os.tmpdir(), 'pretext-home-'))
+  try {
+    const result = run(['init', 'claude-code', '--force', '--offline'], home)
+    assert.equal(result.status, 0, result.stderr)
+    const skillPath = path.join(home, '.claude', 'skills', 'pretext-frontend-motion', 'SKILL.md')
+    assert.match(readFileSync(skillPath, 'utf8'), /Pretext Frontend Motion/)
+  } finally {
+    rmSync(home, { recursive: true, force: true })
+  }
+})
+
 test('init all installs multiple targets', () => {
   const home = mkdtempSync(path.join(os.tmpdir(), 'pretext-home-'))
   try {
@@ -66,8 +78,9 @@ test('doctor reports supported platforms', () => {
     const result = run(['doctor'], home)
     assert.equal(result.status, 0, result.stderr)
     assert.match(result.stdout, /supportedPlatforms/)
-    assert.match(result.stdout, /codex:/)
-    assert.match(result.stdout, /windsurf:/)
+    assert.match(result.stdout, /codex \(Codex\):/)
+    assert.match(result.stdout, /claude-code \(Claude Code\):/)
+    assert.match(result.stdout, /windsurf \(Windsurf\):/)
   } finally {
     rmSync(home, { recursive: true, force: true })
   }

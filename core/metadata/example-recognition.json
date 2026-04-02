@@ -1,0 +1,44 @@
+{
+  "recognitionHints": [
+    {
+      "family": "accordion",
+      "triggerPhrases": ["accordion", "expand", "collapse panels", "measured panels"],
+      "apis": ["prepare", "layout"]
+    },
+    {
+      "family": "bubbles",
+      "triggerPhrases": ["chat bubbles", "message bubbles", "tight multiline bubbles", "messaging UI"],
+      "apis": ["prepare", "layout"]
+    },
+    {
+      "family": "dynamic-layout",
+      "triggerPhrases": ["route around shapes", "obstacle-aware title", "fixed-height spread", "routed text"],
+      "apis": ["prepareWithSegments", "layoutNextLine"]
+    },
+    {
+      "family": "editorial-engine",
+      "triggerPhrases": ["editorial engine", "pull quote", "two-column reflow", "live reflow"],
+      "apis": ["prepareWithSegments", "layoutNextLine", "walkLineRanges"]
+    },
+    {
+      "family": "masonry",
+      "triggerPhrases": ["masonry", "card heights", "bulletin board", "text-card grid"],
+      "apis": ["prepare", "layout"]
+    },
+    {
+      "family": "variable-typographic-ascii",
+      "triggerPhrases": ["ascii poster", "glyph field", "text particles", "canvas typography"],
+      "apis": ["prepareWithSegments", "layoutWithLines"]
+    },
+    {
+      "family": "justification-comparison",
+      "triggerPhrases": ["justification comparison", "paragraph comparison", "line breaking tradeoffs"],
+      "apis": ["walkLineRanges"]
+    },
+    {
+      "family": "rich-text",
+      "triggerPhrases": ["rich text", "inline chips", "links and pills", "mixed inline layout"],
+      "apis": ["prepareWithSegments", "layoutWithLines"]
+    }
+  ]
+}

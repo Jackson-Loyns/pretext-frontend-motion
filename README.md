@@ -54,25 +54,33 @@ Local repo usage:
 ```bash
 npm install
 npm run build
-npx pretext-skill versions
-npx pretext-skill init --ai codex --offline --force
+npm run cli -- versions
+npm run cli -- init codex --force
+npm run cli -- init claude-code --force
 ```
 
 Batch install:
 
 ```bash
-npx pretext-skill init --ai all --offline --force
+npx pretext-skill init all --force
 ```
+
+Preferred target names follow the actual CLI or assistant name:
+`claude-code`, `gemini-cli`, `github-copilot`, `roo-code`.
+Short aliases still work for compatibility, but the docs now prefer the real names.
+Inside this repo, prefer `npm run cli -- ...` so the current workspace build is used directly.
 
 ## Command Table
 
 | Goal | Command |
 | --- | --- |
-| Install one target | `npx pretext-skill init --ai codex --offline --force` |
-| Install all targets | `npx pretext-skill init --ai all --offline --force` |
-| Update installed targets | `npx pretext-skill update --offline --force` |
-| Show package versions | `npx pretext-skill versions` |
-| Inspect local install state | `npx pretext-skill doctor` |
+| Install one target from this repo | `npm run cli -- init codex --force` |
+| Install Claude Code from this repo | `npm run cli -- init claude-code --force` |
+| Install Gemini CLI from this repo | `npm run cli -- init gemini-cli --force` |
+| Install all targets from this repo | `npm run cli -- init all --force` |
+| Update installed targets from this repo | `npm run cli -- update --offline --force` |
+| Show package versions from this repo | `npm run cli -- versions` |
+| Inspect local install state from this repo | `npm run cli -- doctor` |
 
 If a target assistant is already open, restart it after install or update so it reloads the bundle.
 

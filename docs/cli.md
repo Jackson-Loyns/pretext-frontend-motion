@@ -4,33 +4,55 @@
 
 The installer CLI lives in `packages/cli` and is exposed locally as `pretext-skill`
 after running `npm install && npm run build` in the repo root.
+Inside this repo, prefer `npm run cli -- ...` so you always execute the current workspace build.
 
 ## Commands
 
 | Command | What it does |
 | --- | --- |
-| `npx pretext-skill init --ai <target> --offline --force` | install one target from bundled assets |
-| `npx pretext-skill init --ai all --offline --force` | install every supported target |
+| `npx pretext-skill init <target> --force` | install one target from bundled assets |
+| `npx pretext-skill init all --force` | install every supported target |
 | `npx pretext-skill update --offline --force` | refresh all installed targets from bundled assets |
 | `npx pretext-skill versions` | print CLI and bundle version |
 | `npx pretext-skill doctor` | inspect install paths and install state |
 
-## Supported `--ai` values
+Repo-local equivalents:
+
+| Command | What it does |
+| --- | --- |
+| `npm run cli -- init <target> --force` | install one target from the current workspace |
+| `npm run cli -- init all --force` | install every supported target from the current workspace |
+| `npm run cli -- update --offline --force` | refresh installs from the current workspace |
+| `npm run cli -- versions` | print CLI and bundle version from the current workspace |
+| `npm run cli -- doctor` | inspect install state using the current workspace build |
+
+## Supported target values
+
+Preferred target values:
 
 - `antigravity`
-- `claude`
+- `claude-code`
 - `codex`
 - `continue`
-- `copilot`
+- `github-copilot`
 - `cursor`
-- `gemini`
+- `gemini-cli`
 - `kiro`
 - `opencode`
 - `qoder`
-- `roocode`
+- `roo-code`
 - `trae`
 - `windsurf`
 - `all`
+
+Accepted compatibility aliases:
+
+- `claude`
+- `claudecode`
+- `copilot`
+- `gemini`
+- `open-code`
+- `roocode`
 
 ## Options
 
@@ -44,9 +66,11 @@ after running `npm install && npm run build` in the repo root.
 ```bash
 npm install
 npm run build
-npx pretext-skill versions
-npx pretext-skill init --ai codex --offline --force
-npx pretext-skill doctor
+npm run cli -- versions
+npm run cli -- init codex --force
+npm run cli -- init claude-code --force
+npm run cli -- init github-copilot --force
+npm run cli -- doctor
 ```
 
 ## Update Workflow

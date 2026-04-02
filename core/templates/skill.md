@@ -39,6 +39,7 @@ Do not fall back to DOM text measurement in resize or interaction hot paths.
 - `references/prompt-recipes.md` for high-quality prompt patterns
 - `references/design-rules.md` for visual direction and anti-generic rules
 - `references/font-strategy.md` for typeface selection and fallback rules
+- `examples/README.md` for example selection and recognition hints
 - `examples/` for runnable starter examples
 - `blueprints/` for richer but non-runnable cases
 

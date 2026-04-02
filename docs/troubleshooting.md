@@ -12,7 +12,7 @@ Check these first:
 Use:
 
 ```bash
-npx pretext-skill doctor
+npm run cli -- doctor
 ```
 
 ## The assistant installed the bundle but still produces generic frontend style
@@ -30,7 +30,7 @@ Those files are the main visual guardrails.
 Re-run with:
 
 ```bash
-npx pretext-skill init --ai <target> --offline --force
+npm run cli -- init <target> --force
 ```
 
 ## I changed the repo but the installed bundle still looks old
@@ -39,7 +39,17 @@ Run:
 
 ```bash
 npm run build
-npx pretext-skill update --offline --force
+npm run cli -- update --offline --force
 ```
 
 Then restart the assistant.
+
+## `npx pretext-skill` does not seem to use the current repo build
+
+When you are working inside this repo, prefer:
+
+```bash
+npm run cli -- <command>
+```
+
+That path uses the current workspace build directly and avoids stale `npx` resolution.

@@ -18,6 +18,7 @@ Bundled references:
 - `references/prompt-recipes.md`
 - `references/design-rules.md`
 - `references/font-strategy.md`
+- `examples/README.md`
 - `examples/`
 - `blueprints/`
 
