@@ -1,0 +1,92 @@
+{
+  "demos": [
+    {
+      "id": "accordion",
+      "title": "Accordion",
+      "upstreamPath": "/demos/accordion",
+      "summary": "Expand and collapse sections whose text heights are calculated from Pretext.",
+      "apis": ["prepare", "layout"],
+      "mode": "predictive-ui",
+      "example": "examples/accordion",
+      "prompt": "Build an accordion where section copy height is computed from Pretext before expansion, so the transition stays stable and the layout does not guess with DOM reads.",
+      "constraints": ["cache prepared text", "compute copy height with layout()", "no DOM text measurement in relayout path"]
+    },
+    {
+      "id": "bubbles",
+      "title": "Bubbles",
+      "upstreamPath": "/demos/bubbles",
+      "summary": "Tight multiline message bubbles that keep the same line count with less wasted area.",
+      "apis": ["prepare", "layout"],
+      "mode": "predictive-ui",
+      "example": "examples/bubbles",
+      "prompt": "Create a premium multilingual message demo where each bubble knows its text height and width behavior before paint and avoids wasted space.",
+      "constraints": ["predict height before paint", "support mixed-language copy", "tight multiline bubbles"]
+    },
+    {
+      "id": "dynamic-layout",
+      "title": "Dynamic Layout",
+      "upstreamPath": "/demos/dynamic-layout",
+      "summary": "A fixed-height editorial spread with obstacle-aware title routing and continuous flow.",
+      "apis": ["prepareWithSegments", "layoutNextLine"],
+      "mode": "editorial-routing",
+      "example": "examples/dynamic-layout",
+      "prompt": "Build a fixed-height editorial spread with a routed title and body copy that adapts line by line around a moving obstacle.",
+      "constraints": ["line-by-line routing", "fixed-height composition", "geometry-driven relayout"]
+    },
+    {
+      "id": "variable-typographic-ascii",
+      "title": "Variable Typographic ASCII",
+      "upstreamPath": "/demos/variable-typographic-ascii",
+      "summary": "Particle-driven ASCII art comparing proportional measured glyphs against a monospace version.",
+      "apis": ["prepareWithSegments", "layoutWithLines"],
+      "mode": "kinetic-typography",
+      "example": "examples/variable-typographic-ascii",
+      "prompt": "Create a canvas-based ASCII poster where measured text anchors drive a proportional glyph field and expose the contrast against a monospace treatment.",
+      "constraints": ["canvas-first", "measured line anchors", "motion tied to glyph positions"]
+    },
+    {
+      "id": "editorial-engine",
+      "title": "Editorial Engine",
+      "upstreamPath": "/demos/editorial-engine",
+      "summary": "Animated orbs, live text reflow, pull quotes, and multi-column flow with zero DOM measurements.",
+      "apis": ["prepareWithSegments", "layoutNextLine", "walkLineRanges"],
+      "mode": "editorial-routing",
+      "example": "examples/editorial-engine",
+      "prompt": "Build an editorial engine demo with moving orbs, a pull quote, and multi-column reflow that stays in Pretext instead of falling back to DOM measurement.",
+      "constraints": ["multi-column handoff", "live text reflow", "animated geometry"]
+    },
+    {
+      "id": "justification-comparison",
+      "title": "Justification Comparison",
+      "upstreamPath": "/demos/justification-comparison",
+      "summary": "CSS justification, greedy hyphenation, and Knuth-Plass paragraph layout shown side by side to reveal rivers and spacing tradeoffs.",
+      "apis": ["walkLineRanges"],
+      "mode": "width-tight-ui",
+      "blueprint": "blueprints/justification-comparison.md",
+      "prompt": "Compare multiple paragraph justification strategies side by side and explain where Pretext can help with width probes, line counts, and layout experimentation.",
+      "constraints": ["show tradeoffs explicitly", "treat as comparison tool, not a fake full typography engine"]
+    },
+    {
+      "id": "rich-text",
+      "title": "Rich Text",
+      "upstreamPath": "/demos/rich-note",
+      "summary": "Rich inline text, code spans, links, and chips laid out together, with pills staying whole while text keeps wrapping naturally.",
+      "apis": ["prepareWithSegments", "layoutWithLines"],
+      "mode": "rich-inline-layout",
+      "blueprint": "blueprints/rich-text.md",
+      "prompt": "Design a rich inline layout demo where links, chips, and code spans flow together while non-breakable pills stay intact and text wraps naturally.",
+      "constraints": ["mixed inline content", "keep pills whole", "do not reduce to plain paragraph layout"]
+    },
+    {
+      "id": "masonry",
+      "title": "Masonry",
+      "upstreamPath": "/demos/masonry",
+      "summary": "A text-card occlusion demo where height prediction comes from Pretext instead of DOM reads.",
+      "apis": ["prepare", "layout"],
+      "mode": "predictive-ui",
+      "example": "examples/masonry",
+      "prompt": "Build a masonry-like bulletin where card heights come from Pretext and the packing stays stable without DOM text reads.",
+      "constraints": ["card height prediction", "grid packing", "zero hot-path DOM measurement"]
+    }
+  ]
+}

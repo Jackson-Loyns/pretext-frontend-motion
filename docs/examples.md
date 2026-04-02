@@ -1,77 +1,49 @@
 # Examples
 
-## Prompt to Result Mapping
+## Runnable Official Families
 
-| Prompt | Best mode | Suggested preset | Expected result shape | Core APIs |
-| --- | --- | --- | --- | --- |
-| Build a zero-CLS text bubble demo for multilingual chat messages | `predictive-ui` | `signal-bubbles` | Measured bubble widths and heights, stable list layout, strong messaging visuals | `prepare`, `layout` |
-| Build a compact bulletin where cards pack tightly around uneven copy lengths | `predictive-ui` | `tight-masonry` | Masonry-like text cards with stable heights and no reflow jitter | `prepare`, `layout` |
-| Make a magazine-style landing page where the headline wraps around floating marks | `editorial-routing` | `orbital-essay` | Obstacle-aware hero, visible routed text bands, editorial composition | `prepareWithSegments`, `layoutNextLine` |
-| Create a pull-quote spread where copy bends around a large circular quote mark | `editorial-routing` | `pull-quote-spread` | Routed article layout with compositional interruption | `prepareWithSegments`, `layoutNextLine` |
-| Create an ASCII poster with animated glyph particles that return to measured text positions | `kinetic-typography` | `ribbon-ascii` | Canvas poster, animated glyph field, pointer reaction | `prepareWithSegments`, `layoutWithLines` |
-| Make a motion poster where text gets pushed by the pointer and settles back into lines | `kinetic-typography` | `pointer-poster` | Kinetic canvas typography anchored to measured positions | `prepareWithSegments`, `layoutWithLines` |
-
-## Scaffold Recipes
-
-### Predictive UI
-
-```bash
-python3 scripts/pretext_cli.py scaffold \
-  --kind predictive-ui \
-  --preset multilingual-feed \
-  --title "Measured Dispatch" \
-  --out output/measured-dispatch
-```
-
-Use when the point is stable text sizing before paint.
-
-### Editorial Routing
-
-```bash
-python3 scripts/pretext_cli.py scaffold \
-  --kind editorial-routing \
-  --preset routed-manifesto \
-  --title "Routed Manifesto" \
-  --out output/routed-manifesto
-```
-
-Use when the point is line-by-line rerouting around geometry.
-
-### Kinetic Typography
-
-```bash
-python3 scripts/pretext_cli.py scaffold \
-  --kind kinetic-typography \
-  --preset pointer-poster \
-  --title "Vector Choir" \
-  --out output/vector-choir
-```
-
-Use when the point is motion derived from measured text structure.
-
-## Good Prompt Shape
-
-Use prompts that specify all three layers:
-
-1. product or content intent
-2. visual direction
-3. text behavior
-
-Example:
+### Accordion
 
 ```text
-Build a landing page for an AI publishing tool.
-Use a warm editorial palette, sharp serif display type, and a restrained motion system.
-The headline and deck should route around floating shapes and reflow cleanly on resize.
-Use Pretext in the real layout path instead of DOM measurement.
+Build an accordion where panel copy height is predicted with Pretext before expansion, so the layout stays stable and the transition does not guess from DOM reads.
 ```
 
-## Weak Prompt Shape
-
-Avoid prompts like this:
+### Bubbles
 
 ```text
-Make a cool page with Pretext and some animations.
+Create a multilingual message surface with tight multiline bubbles. Use Pretext so each bubble knows its text height before paint and the layout stays compact.
 ```
 
-That does not define the visual language, the text behavior, or the actual role of Pretext.
+### Dynamic Layout
+
+```text
+Build a fixed-height editorial spread where text reroutes around a moving obstacle. Use `layoutNextLine()` to recalculate each line against the available slot.
+```
+
+### Variable Typographic ASCII
+
+```text
+Make a canvas ASCII poster where measured lines create proportional anchor positions and the glyph field reacts to the pointer before settling back.
+```
+
+### Editorial Engine
+
+```text
+Create an editorial engine demo with moving circular geometry, a pull quote, and multi-column text reflow with no DOM text measurement in the relayout path.
+```
+
+### Masonry
+
+```text
+Build a masonry-like bulletin where card height prediction comes from Pretext and the packing stays stable with mixed-length copy.
+```
+
+## Blueprint Families
+
+### Justification Comparison
+
+Use when the request is about paragraph layout tradeoffs instead of a single poster-like demo.
+
+### Rich Text
+
+Use when the request is about mixed inline content such as links, chips, and code spans flowing together.

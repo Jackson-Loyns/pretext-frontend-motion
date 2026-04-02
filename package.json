@@ -1,0 +1,15 @@
+{
+  "name": "pretext-frontend-motion-repo",
+  "private": true,
+  "workspaces": [
+    "packages/cli"
+  ],
+  "dependencies": {
+    "pretext-skill": "file:packages/cli"
+  },
+  "scripts": {
+    "build": "npm run build --workspace packages/cli",
+    "test": "npm run test --workspace packages/cli",
+    "cli": "npm exec --workspace packages/cli pretext-skill --"
+  }
+}

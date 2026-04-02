@@ -1,78 +1,58 @@
 # CLI Guide
 
-## Included Commands
+## Overview
 
-This repo exposes one main command entry:
+The installer CLI lives in `packages/cli` and is exposed locally as `pretext-skill`
+after running `npm install && npm run build` in the repo root.
 
-```bash
-python3 scripts/pretext_cli.py --help
-```
+## Commands
 
-## Unified CLI
-
-| Goal | Command |
+| Command | What it does |
 | --- | --- |
-| List available modes | `python3 scripts/pretext_cli.py list-kinds` |
-| List all presets | `python3 scripts/pretext_cli.py list-presets` |
-| List presets for one mode | `python3 scripts/pretext_cli.py list-presets --kind kinetic-typography` |
-| Scaffold a demo | `python3 scripts/pretext_cli.py scaffold --kind predictive-ui --preset multilingual-feed --title "Measured Dispatch" --out output/measured-dispatch` |
-| Validate this skill repo | `python3 scripts/pretext_cli.py validate .` |
-| Install into Codex via symlink | `python3 scripts/pretext_cli.py install-symlink` |
-| Pull updates from git | `python3 scripts/pretext_cli.py update origin main` |
+| `npx pretext-skill init --ai <target> --offline --force` | install one target from bundled assets |
+| `npx pretext-skill init --ai all --offline --force` | install every supported target |
+| `npx pretext-skill update --offline --force` | refresh all installed targets from bundled assets |
+| `npx pretext-skill versions` | print CLI and bundle version |
+| `npx pretext-skill doctor` | inspect install paths and install state |
 
-## Lower-Level Scripts
+## Supported `--ai` values
 
-Use these if you want the raw underlying tools instead of the unified entrypoint.
+- `antigravity`
+- `claude`
+- `codex`
+- `continue`
+- `copilot`
+- `cursor`
+- `gemini`
+- `kiro`
+- `opencode`
+- `qoder`
+- `roocode`
+- `trae`
+- `windsurf`
+- `all`
 
-| Script | Purpose | Example |
-| --- | --- | --- |
-| `scripts/new_pretext_demo.py` | Copy a starter and apply a preset | `python3 scripts/new_pretext_demo.py --kind editorial-routing --preset routed-manifesto --title "Field Notes" --out output/field-notes` |
-| `scripts/validate_skill.py` | Check file structure and starter presence | `python3 scripts/validate_skill.py .` |
-| `scripts/install_symlink.sh` | Install this repo into Codex as a symlink | `./scripts/install_symlink.sh` |
-| `scripts/update_from_git.sh` | Fast-forward the current branch from a git remote | `./scripts/update_from_git.sh upstream main` |
+## Options
 
-## Upstream Pretext Commands
-
-These are the original project commands you will need when you want to inspect or compare against the source library.
-
-| Goal | Command |
+| Option | Meaning |
 | --- | --- |
-| Install the library in a project | `npm install @chenglou/pretext` |
-| Run the upstream demo repo locally | `bun install && bun start` |
+| `--offline` | use bundled assets only |
+| `--force` | overwrite an existing install path |
 
-Upstream command source:
-- [pretext README](https://github.com/chenglou/pretext/blob/main/README.md)
-- [pretext DEVELOPMENT.md](https://github.com/chenglou/pretext/blob/main/DEVELOPMENT.md)
-
-## Practical Workflow
-
-### 1. Inspect available shapes
+## Local Workflow
 
 ```bash
-python3 scripts/pretext_cli.py list-kinds
-python3 scripts/pretext_cli.py list-presets --kind predictive-ui
-```
-
-### 2. Create a demo
-
-```bash
-python3 scripts/pretext_cli.py scaffold \
-  --kind predictive-ui \
-  --preset tight-masonry \
-  --title "Packed Signals" \
-  --out output/packed-signals
-```
-
-### 3. Run it
-
-```bash
-cd output/packed-signals
 npm install
-npm run dev
+npm run build
+npx pretext-skill versions
+npx pretext-skill init --ai codex --offline --force
+npx pretext-skill doctor
 ```
 
-### 4. Validate the skill repo before sharing
+## Update Workflow
 
 ```bash
-python3 scripts/pretext_cli.py validate .
+npx pretext-skill update --offline --force
 ```
+
+This refreshes all already-installed targets that exist under your home directory.

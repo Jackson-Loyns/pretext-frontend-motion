@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pretext Frontend Motion"
+  short_description: "Official Pretext demo families, text-driven layouts, and kinetic typography workflows"
+  default_prompt: "Build an official Pretext-style demo with real measurement logic, strong visual direction, and clear explanation of how Pretext is used."

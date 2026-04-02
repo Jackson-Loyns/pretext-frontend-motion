@@ -1,117 +1,115 @@
 # Pretext Frontend Motion
 
-`Pretext Frontend Motion` is a Codex skill package for building frontend demos where text layout is the engine, not an afterthought.
+Pretext Frontend Motion is a multi-CLI installable skill bundle built around
+[`@chenglou/pretext`](https://github.com/chenglou/pretext) and the official
+[Pretext demos](https://chenglou.me/pretext/).
 
-It is built around [`@chenglou/pretext`](https://github.com/chenglou/pretext): a browser-side text measurement and line layout library that avoids DOM reflow in the hot path. This repo turns that library into a usable skill with strong defaults, runnable examples, CLI tooling, and author-backed guardrails.
+The goal is not to wrap Pretext in vague “cool animation” prompts. The goal is
+to turn the upstream library and demo patterns into a usable, installable bundle
+for multiple AI coding assistants and CLIs.
 
-## What This Skill Covers
+## Why This Repo Exists
 
-| Capability | What it helps generate |
+The upstream project already shows a clear design space:
+
+- Accordion
+- Bubbles
+- Dynamic Layout
+- Variable Typographic ASCII
+- Editorial Engine
+- Justification Comparison
+- Rich Text
+- Masonry
+
+This repo packages that design space into:
+
+- a shared content core
+- platform templates for multiple assistants
+- an installer CLI
+- runnable examples for the first six official demo families
+
+## Supported Assistants / CLIs
+
+| Target | Install location |
 | --- | --- |
-| Predictive text sizing | Zero-CLS accordions, chat bubbles, text cards, masonry grids |
-| Editorial routing | Text around logos, circles, pull quotes, multi-column stories |
-| Kinetic typography | Canvas text motion, scroll-based morphs, ASCII experiments, particle text |
-| Strong visual direction | Better type, stronger composition, more intentional motion |
-| Starter-first workflow | Copy a working starter, then adapt it instead of inventing boilerplate each time |
+| Codex | `~/.codex/skills/pretext-frontend-motion` |
+| Claude Code | `~/.claude/skills/pretext-frontend-motion` |
+| Cursor | `~/.cursor/skills/pretext-frontend-motion` |
+| Windsurf | `~/.windsurf/skills/pretext-frontend-motion` |
+| Gemini CLI | `~/.gemini/skills/pretext-frontend-motion` |
+| OpenCode | `~/.opencode/skills/pretext-frontend-motion` |
+| Continue | `~/.continue/skills/pretext-frontend-motion` |
+| GitHub Copilot | `~/.github/prompts/pretext-frontend-motion` |
+| Roo Code | `~/.roo/skills/pretext-frontend-motion` |
+| Qoder | `~/.qoder/skills/pretext-frontend-motion` |
+| Kiro | `~/.kiro/steering/pretext-frontend-motion` |
+| Trae | `~/.trae/skills/pretext-frontend-motion` |
+| Antigravity / Generic Agent | `~/.agents/skills/pretext-frontend-motion` |
 
-## Official Basis
+Platform metadata lives in [platforms](platforms).
 
-This repo follows the original `pretext` project rather than inventing its own rules.
+## Official Demo Coverage
 
-- `prepare()` is the one-time work and `layout()` is the cheap hot path. Resize should usually rerun `layout()`, not `prepare()`.
-- The core value is avoiding DOM reads like `getBoundingClientRect()` and `offsetHeight` in the relayout path.
-- `layoutNextLine()`, `walkLineRanges()`, and `layoutWithLines()` are the right tools when text must route around geometry or drive Canvas rendering.
-- `system-ui` is called out upstream as unsafe for precision-critical layout on macOS.
-- The project is browser-first today. Server-side is discussed upstream, but not something this skill should overpromise by default.
+| Official demo | Status here | Primary APIs |
+| --- | --- | --- |
+| Accordion | Runnable example | `prepare`, `layout` |
+| Bubbles | Runnable example | `prepare`, `layout` |
+| Dynamic Layout | Runnable example | `prepareWithSegments`, `layoutNextLine` |
+| Variable Typographic ASCII | Runnable example | `prepareWithSegments`, `layoutWithLines` |
+| Editorial Engine | Runnable example | `prepareWithSegments`, `layoutNextLine`, `walkLineRanges` |
+| Justification Comparison | Blueprint + prompt recipe | `walkLineRanges` |
+| Rich Text | Blueprint + prompt recipe | `prepareWithSegments`, `layoutWithLines` |
+| Masonry | Runnable example | `prepare`, `layout` |
 
-Read the condensed source-backed notes in [references/official-notes.md](references/official-notes.md).
+See [docs/official-demos.md](docs/official-demos.md).
 
-Primary upstream sources:
-- [pretext README](https://github.com/chenglou/pretext/blob/main/README.md)
-- [pretext RESEARCH.md](https://github.com/chenglou/pretext/blob/main/RESEARCH.md)
-- [pretext STATUS.md](https://github.com/chenglou/pretext/blob/main/STATUS.md)
+## Quick Install
 
-## Fast Start
-
-Use the unified CLI:
+Local repo usage:
 
 ```bash
-python3 scripts/pretext_cli.py list-kinds
-python3 scripts/pretext_cli.py list-presets --kind predictive-ui
-python3 scripts/pretext_cli.py scaffold --kind predictive-ui --preset signal-bubbles --title "Signal Bubbles" --out output/signal-bubbles
-cd output/signal-bubbles
 npm install
-npm run dev
+npm run build
+npx pretext-skill versions
+npx pretext-skill init --ai codex --offline --force
 ```
 
-## CLI
+Batch install:
+
+```bash
+npx pretext-skill init --ai all --offline --force
+```
+
+## Command Table
 
 | Goal | Command |
 | --- | --- |
-| List demo modes | `python3 scripts/pretext_cli.py list-kinds` |
-| List presets for one mode | `python3 scripts/pretext_cli.py list-presets --kind editorial-routing` |
-| Scaffold a runnable demo | `python3 scripts/pretext_cli.py scaffold --kind kinetic-typography --preset pointer-poster --title "Vector Choir" --out output/vector-choir` |
-| Validate this skill repo | `python3 scripts/pretext_cli.py validate .` |
-| Install into Codex via symlink | `python3 scripts/pretext_cli.py install-symlink` |
-| Update from git remote | `python3 scripts/pretext_cli.py update origin main` |
+| Install one target | `npx pretext-skill init --ai codex --offline --force` |
+| Install all targets | `npx pretext-skill init --ai all --offline --force` |
+| Update installed targets | `npx pretext-skill update --offline --force` |
+| Show package versions | `npx pretext-skill versions` |
+| Inspect local install state | `npx pretext-skill doctor` |
 
-For the full command guide, see [docs/cli.md](/Users/c14h14n3/Desktop/pretext/docs/cli.md).
-
-## Choose a Mode
-
-| Mode | Use it when | Primary APIs |
-| --- | --- | --- |
-| `predictive-ui` | You need stable text height before paint | `prepare`, `layout` |
-| `editorial-routing` | Text must bend around shapes or hand off across changing widths | `prepareWithSegments`, `layoutNextLine`, `walkLineRanges` |
-| `kinetic-typography` | Motion should derive from measured line or glyph structure | `prepareWithSegments`, `layoutWithLines` |
-
-## Ready-Made Presets
-
-| Mode | Presets |
-| --- | --- |
-| `predictive-ui` | `signal-bubbles`, `tight-masonry`, `multilingual-feed` |
-| `editorial-routing` | `orbital-essay`, `pull-quote-spread`, `routed-manifesto` |
-| `kinetic-typography` | `pulse-type`, `ribbon-ascii`, `pointer-poster` |
-
-## Example Requests
-
-- Build a zero-CLS messaging wall where mixed-language bubbles know their height before render.
-- Create an editorial landing page where the headline and body copy reroute around a floating emblem.
-- Make a motion poster where the pointer disturbs measured text and the lines settle back into place.
-- Build a compact masonry bulletin where card height is driven by measured copy rather than DOM reflow.
-
-## Documentation Map
-
-- [docs/quick-reference.md](docs/quick-reference.md): when to use this skill, which mode to pick, and what commands to run
-- [docs/cli.md](docs/cli.md): CLI usage for this repo and the upstream `pretext` project
-- [docs/guide.md](docs/guide.md): workflow and delivery rules
-- [docs/design-rules.md](docs/design-rules.md): visual and motion constraints
-- [docs/examples.md](docs/examples.md): prompt-to-output examples and scaffold recipes
-- [docs/install.md](docs/install.md): install and local validation
-- [docs/update.md](docs/update.md): sync and update strategy
-- [references/official-notes.md](references/official-notes.md): direct notes from the original author repository
-- [references/capabilities.md](references/capabilities.md): API boundaries and practical limits
-- [references/patterns.md](references/patterns.md): implementation patterns
-- [references/design-rules.md](references/design-rules.md): condensed AI-facing design rules
-- [references/react-migration.md](references/react-migration.md): React porting guidance
-
-## Directory Layout
+## Repo Layout
 
 ```text
-pretext-frontend-motion/
-├── SKILL.md
-├── README.md
-├── agents/
-├── evals/
-├── docs/
-├── references/
-├── scripts/
-└── assets/
+core/          shared installable content
+platforms/     platform install metadata
+packages/cli/  Node.js + TypeScript installer CLI
+docs/          user-facing documentation
 ```
 
-## Notes
+## Documentation
 
-- This package targets browser demos first.
-- Use named fonts for measurement-critical typography.
-- Do not sell SSR accuracy, DOM-free rich text editing, or full CSS text feature parity unless you have implemented and verified those behaviors yourself.
-- Run `python3 scripts/validate_skill.py .` before installing or sharing the skill.
+- [docs/quick-reference.md](docs/quick-reference.md)
+- [docs/cli.md](docs/cli.md)
+- [docs/official-demos.md](docs/official-demos.md)
+- [docs/examples.md](docs/examples.md)
+- [docs/platforms](docs/platforms)
+- [references/official-notes.md](references/official-notes.md)
+
+## Current Constraints
+
+- The installer is publish-ready in structure, but this repo is not automatically published to npm from here.
+- Local usage works today after `npm install && npm run build`.
+- The bundle is browser-first and follows upstream limits around `system-ui`, DOM measurement, and server-side claims.

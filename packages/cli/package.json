@@ -1,0 +1,23 @@
+{
+  "name": "pretext-skill",
+  "version": "0.3.0",
+  "description": "Installer CLI for the Pretext Frontend Motion multi-platform skill bundle",
+  "type": "module",
+  "bin": {
+    "pretext-skill": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "assets",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copy-assets.mjs",
+    "test": "node --test ../../tests/cli.test.mjs"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.8.3"
+  }
+}

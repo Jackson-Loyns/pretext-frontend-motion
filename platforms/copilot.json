@@ -1,0 +1,18 @@
+{
+  "platform": "copilot",
+  "displayName": "GitHub Copilot",
+  "folderStructure": {
+    "root": ".github",
+    "skillPath": "prompts/pretext-frontend-motion",
+    "filename": "PROMPT.md"
+  },
+  "frontmatter": {
+    "name": "pretext-frontend-motion",
+    "description": "Workflow for building official Pretext-style demos, text-driven layouts, and kinetic typography with real measurement logic."
+  },
+  "title": "Pretext Frontend Motion",
+  "entryType": "prompt",
+  "sections": {
+    "quickReference": false
+  }
+}

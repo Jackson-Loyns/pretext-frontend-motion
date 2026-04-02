@@ -1,0 +1,103 @@
+:root {
+  color-scheme: dark;
+  --page: #0d1216;
+  --panel: #141c22;
+  --line: rgba(244, 236, 225, 0.1);
+  --ink: #f4ece1;
+  --muted: #b2babf;
+  --accent: #d78754;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(215, 135, 84, 0.18), transparent 24%),
+    linear-gradient(180deg, #10171c, var(--page));
+}
+
+.page {
+  width: min(920px, calc(100vw - 28px));
+  margin: 0 auto;
+  padding: 32px 0 56px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+}
+
+h1 {
+  margin: 0;
+  font: 700 clamp(2.8rem, 7vw, 4.6rem)/0.95 Georgia, serif;
+}
+
+.intro {
+  max-width: 60ch;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.accordion {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.item {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(20, 28, 34, 0.96), rgba(12, 17, 20, 0.98));
+  overflow: hidden;
+}
+
+.toggle {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.body {
+  height: 0;
+  overflow: hidden;
+  transition: height 220ms ease;
+}
+
+.inner {
+  padding: 0 20px 20px;
+}
+
+.inner p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+  .page {
+    width: min(100vw - 18px, 920px);
+    padding-top: 22px;
+  }
+
+  .toggle {
+    display: grid;
+    gap: 6px;
+  }
+}

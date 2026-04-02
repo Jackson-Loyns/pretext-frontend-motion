@@ -1,0 +1,18 @@
+{
+  "platform": "antigravity",
+  "displayName": "Antigravity / Generic Agent",
+  "folderStructure": {
+    "root": ".agents",
+    "skillPath": "skills/pretext-frontend-motion",
+    "filename": "SKILL.md"
+  },
+  "frontmatter": {
+    "name": "pretext-frontend-motion",
+    "description": "Build official Pretext-style demos, text-driven layouts, and kinetic typography with real measurement logic."
+  },
+  "title": "Pretext Frontend Motion",
+  "entryType": "skill",
+  "sections": {
+    "quickReference": false
+  }
+}

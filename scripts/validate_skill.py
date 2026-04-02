@@ -9,11 +9,14 @@ from pathlib import Path
 
 
 REQUIRED_FILES = [
+    "package.json",
     "SKILL.md",
     "README.md",
     "agents/openai.yaml",
     "docs/quick-reference.md",
     "docs/cli.md",
+    "docs/official-demos.md",
+    "docs/platforms/README.md",
     "docs/install.md",
     "docs/update.md",
     "docs/guide.md",
@@ -24,6 +27,16 @@ REQUIRED_FILES = [
     "references/patterns.md",
     "references/design-rules.md",
     "references/react-migration.md",
+    "core/metadata/demos.json",
+    "core/templates/skill.md",
+    "core/templates/prompt.md",
+    "core/bundle/references/official-notes.md",
+    "core/bundle/references/demo-family-map.md",
+    "core/bundle/references/prompt-recipes.md",
+    "packages/cli/package.json",
+    "packages/cli/tsconfig.json",
+    "packages/cli/src/index.ts",
+    "packages/cli/scripts/copy-assets.mjs",
     "evals/evals.json",
     "scripts/pretext_cli.py",
     "scripts/new_pretext_demo.py",
@@ -32,9 +45,12 @@ REQUIRED_FILES = [
 ]
 
 STARTERS = [
-    "assets/starter-predictive-ui",
-    "assets/starter-editorial-routing",
-    "assets/starter-kinetic-typography",
+    "core/bundle/examples/accordion",
+    "core/bundle/examples/bubbles",
+    "core/bundle/examples/dynamic-layout",
+    "core/bundle/examples/editorial-engine",
+    "core/bundle/examples/masonry",
+    "core/bundle/examples/variable-typographic-ascii",
 ]
 
 

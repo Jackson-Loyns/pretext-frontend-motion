@@ -2,39 +2,51 @@
   "skill_name": "pretext-frontend-motion",
   "evals": [
     {
-      "id": "predictive-ui-wall",
-      "prompt": "Build a premium multilingual message wall demo where each text bubble knows its height before paint. The result should feel compact and editorial, not like a generic dashboard.",
-      "expected_output": "A complete predictive-ui demo that uses Pretext in the sizing path and produces width-tight message bubbles without DOM text measurement.",
+      "id": "accordion-measured-panels",
+      "prompt": "Build an accordion where panel copy height is computed with Pretext before expansion, so the transition stays stable and the layout does not rely on DOM text measurement.",
+      "expected_output": "A runnable Accordion example that uses prepare() and layout() for panel height prediction.",
       "files": []
     },
     {
-      "id": "editorial-routing-hero",
-      "prompt": "Create a typography-heavy landing page hero where the headline and body text route around floating circular artwork and reflow cleanly on resize.",
-      "expected_output": "An editorial-routing demo with obstacle-aware text flow, visible composition, and responsive rerouting.",
+      "id": "bubbles-tight-multiline",
+      "prompt": "Create a multilingual bubble demo where each message keeps a tight multiline shape and the layout stays stable before paint.",
+      "expected_output": "A Bubbles example that uses prepare() and layout() for tight multiline message geometry.",
       "files": []
     },
     {
-      "id": "kinetic-type-canvas",
-      "prompt": "Make a canvas-based kinetic typography poster where measured text reacts to pointer movement and settles back into its original line layout.",
-      "expected_output": "A kinetic-typography demo where motion is anchored to Pretext-derived line or glyph positions rather than decorative-only animation.",
+      "id": "dynamic-layout-routed-title",
+      "prompt": "Build a fixed-height editorial spread where title and body lines reroute around a moving circular obstacle.",
+      "expected_output": "A Dynamic Layout example that uses prepareWithSegments() and layoutNextLine() for obstacle-aware routing.",
       "files": []
     },
     {
-      "id": "predictive-ui-masonry",
-      "prompt": "Build a compact editorial bulletin with masonry-like cards whose text heights are computed before layout. It should feel intentional and premium rather than like a dashboard.",
-      "expected_output": "A predictive-ui demo where card packing depends on Pretext layout results instead of post-render DOM measurement.",
+      "id": "variable-typographic-ascii-poster",
+      "prompt": "Create a canvas-based ASCII poster where measured lines provide anchor positions for a proportional glyph field.",
+      "expected_output": "A Variable Typographic ASCII example that uses layoutWithLines() as the basis for canvas rendering.",
       "files": []
     },
     {
-      "id": "editorial-routing-pull-quote",
-      "prompt": "Create an article spread where a large circular pull quote interrupts the column and the body copy reroutes around it line by line.",
-      "expected_output": "An editorial-routing demo where obstacle-aware line layout is the central behavior and the composition still works on resize.",
+      "id": "editorial-engine-live-reflow",
+      "prompt": "Build an editorial engine demo with moving orbs, a pull quote, and two-column live text reflow without DOM text measurement in the hot path.",
+      "expected_output": "An Editorial Engine example that uses prepareWithSegments(), layoutNextLine(), and walkLineRanges() to drive live reflow.",
       "files": []
     },
     {
-      "id": "kinetic-type-ascii-ribbon",
-      "prompt": "Create a canvas poster where measured text anchors drive an animated ASCII ribbon field with restrained but obvious pointer interaction.",
-      "expected_output": "A kinetic-typography demo with a strong poster-like visual system and motion tied to Pretext-derived text structure.",
+      "id": "masonry-measured-cards",
+      "prompt": "Build a masonry-like bulletin where text card height prediction comes from Pretext instead of post-render DOM reads.",
+      "expected_output": "A Masonry example that uses prepare() and layout() to predict text card height.",
+      "files": []
+    },
+    {
+      "id": "justification-comparison-blueprint",
+      "prompt": "Compare multiple paragraph layout strategies side by side and show where Pretext width probing helps evaluate the tradeoffs.",
+      "expected_output": "A Justification Comparison blueprint with clear Pretext API guidance centered on walkLineRanges().",
+      "files": []
+    },
+    {
+      "id": "rich-text-blueprint",
+      "prompt": "Design a rich inline layout demo where pills, links, and code spans flow together while non-breakable chips stay intact.",
+      "expected_output": "A Rich Text blueprint that explains how prepareWithSegments() and layoutWithLines() support mixed inline layout.",
       "files": []
     }
   ]
