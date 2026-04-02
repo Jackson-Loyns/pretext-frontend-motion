@@ -40,6 +40,9 @@ type InstallRecord = {
   installPath: string
 }
 
+const SHARED_FRONTMATTER_DESCRIPTION =
+  'Build bold text-driven frontend demos across Accordion, Bubbles, Dynamic Layout, Variable Typographic ASCII, Editorial Engine, Justification Comparison, Rich Text, and Masonry. Use when the request needs strong frontend style, intentional typography, routed text layout, width-tight multiline UI, or kinetic typography driven by real Pretext measurement instead of DOM text reads.'
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -204,6 +207,7 @@ function installPlatform(platform: PlatformConfig, force: boolean): void {
   )
 
   console.log(`Installed ${platform.displayName} -> ${installPath}`)
+  console.log(`Restart ${platform.displayName} if it is already open so it reloads the bundle.`)
 }
 
 function renderEntry(platform: PlatformConfig): string {
@@ -211,7 +215,7 @@ function renderEntry(platform: PlatformConfig): string {
   const templateFile = platform.entryType === 'prompt' ? 'prompt.md' : 'skill.md'
   let template = readFileSync(path.join(assetRoot, 'core', 'templates', templateFile), 'utf8')
   template = template.replaceAll('{{name}}', platform.frontmatter.name)
-  template = template.replaceAll('{{frontmatterDescription}}', platform.frontmatter.description)
+  template = template.replaceAll('{{frontmatterDescription}}', SHARED_FRONTMATTER_DESCRIPTION)
   template = template.replaceAll('{{title}}', platform.title)
   template = template.replaceAll('{{quickReferenceSection}}', platform.sections?.quickReference
     ? '\n## Quick Reference\n\n- Start with `references/demo-family-map.md`.\n- Use `examples/` for the first six official demos.\n- Use `blueprints/` for Justification Comparison and Rich Text.\n'

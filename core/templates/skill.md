@@ -37,6 +37,8 @@ Do not fall back to DOM text measurement in resize or interaction hot paths.
 - `references/official-notes.md` for upstream author constraints
 - `references/demo-family-map.md` for official demo mapping and API pairing
 - `references/prompt-recipes.md` for high-quality prompt patterns
+- `references/design-rules.md` for visual direction and anti-generic rules
+- `references/font-strategy.md` for typeface selection and fallback rules
 - `examples/` for runnable starter examples
 - `blueprints/` for richer but non-runnable cases
 

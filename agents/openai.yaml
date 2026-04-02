@@ -1,4 +1,4 @@
 interface:
   display_name: "Pretext Frontend Motion"
-  short_description: "Installable multi-CLI bundle for official Pretext demo families, text-driven layouts, and kinetic typography"
-  default_prompt: "Build an official Pretext-style demo with real Pretext measurement logic, strong visual direction, and a clear explanation of how the chosen demo family maps to upstream APIs."
+  short_description: "Installable multi-CLI bundle for bold text-driven frontend style, official Pretext demo families, and kinetic typography"
+  default_prompt: "Build a visually strong text-driven frontend demo with real Pretext measurement logic, bold typography, non-generic motion, and a clear explanation of how the chosen demo family maps to the implementation."

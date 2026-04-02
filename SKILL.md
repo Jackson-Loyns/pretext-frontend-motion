@@ -1,6 +1,6 @@
 ---
 name: pretext-frontend-motion
-description: Build official Pretext-style demos across Accordion, Bubbles, Dynamic Layout, Variable Typographic ASCII, Editorial Engine, Justification Comparison, Rich Text, and Masonry. Use when the request needs real text measurement, line routing, width-tight multiline UI, or kinetic typography driven by @chenglou/pretext instead of DOM text measurement.
+description: Build bold text-driven frontend demos across Accordion, Bubbles, Dynamic Layout, Variable Typographic ASCII, Editorial Engine, Justification Comparison, Rich Text, and Masonry. Use when the request needs strong frontend style, intentional typography, routed text layout, width-tight multiline UI, or kinetic typography driven by real Pretext measurement instead of DOM text reads.
 ---
 
 # Pretext Frontend Motion

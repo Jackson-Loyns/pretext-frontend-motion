@@ -5,6 +5,24 @@ Good prompts specify:
 1. the official demo family or a very close equivalent
 2. the visual direction
 3. the exact role of Pretext
+4. the motion logic, if motion matters
+
+## Visual prompt ingredients that help
+
+- typography-first
+- poster-like
+- editorial
+- severe or atmospheric palette
+- asymmetrical composition
+- motion tied to line geometry or glyph anchors
+
+Avoid empty phrases like:
+
+- make it cool
+- make it modern
+- add nice animations
+
+Those do not constrain the result enough.
 
 ## Strong prompt examples
 

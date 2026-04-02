@@ -16,6 +16,8 @@ Bundled references:
 - `references/official-notes.md`
 - `references/demo-family-map.md`
 - `references/prompt-recipes.md`
+- `references/design-rules.md`
+- `references/font-strategy.md`
 - `examples/`
 - `blueprints/`
 
@@ -23,5 +25,5 @@ Recommended workflow:
 
 1. Match the request to an official demo family.
 2. Start from the corresponding bundled example or blueprint.
-3. Keep the visual direction intentional, not generic.
+3. Keep the visual direction bold, intentional, and non-generic.
 4. Explain how Pretext is being used in the final result.

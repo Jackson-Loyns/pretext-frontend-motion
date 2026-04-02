@@ -56,3 +56,5 @@ npx pretext-skill update --offline --force
 ```
 
 This refreshes all already-installed targets that exist under your home directory.
+
+Restart the target assistant after install or update so it reloads the bundle.

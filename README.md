@@ -1,32 +1,16 @@
 # Pretext Frontend Motion
 
-Pretext Frontend Motion is a multi-CLI installable skill bundle built around
-[`@chenglou/pretext`](https://github.com/chenglou/pretext) and the official
-[Pretext demos](https://chenglou.me/pretext/).
+Pretext Frontend Motion is a multi-CLI installable bundle for text-driven frontend work:
+measured UI, routed editorial layout, and kinetic typography with strong visual direction.
 
-The goal is not to wrap Pretext in vague “cool animation” prompts. The goal is
-to turn the upstream library and demo patterns into a usable, installable bundle
-for multiple AI coding assistants and CLIs.
+It is designed to help assistants generate better frontend style and motion, not just call Pretext APIs mechanically.
 
-## Why This Repo Exists
+## What It Solves
 
-The upstream project already shows a clear design space:
-
-- Accordion
-- Bubbles
-- Dynamic Layout
-- Variable Typographic ASCII
-- Editorial Engine
-- Justification Comparison
-- Rich Text
-- Masonry
-
-This repo packages that design space into:
-
-- a shared content core
-- platform templates for multiple assistants
-- an installer CLI
-- runnable examples for the first six official demo families
+- installable bundles for multiple assistants and CLIs
+- AI-facing rules for stronger typography, layout, and motion
+- runnable example families instead of abstract placeholder templates
+- contribution flow for bugs, forks, and PRs
 
 ## Supported Assistants / CLIs
 
@@ -46,7 +30,7 @@ This repo packages that design space into:
 | Trae | `~/.trae/skills/pretext-frontend-motion` |
 | Antigravity / Generic Agent | `~/.agents/skills/pretext-frontend-motion` |
 
-Platform metadata lives in [platforms](platforms).
+Platform metadata lives in [platforms](platforms). Platform notes for humans live in [docs/platforms](docs/platforms).
 
 ## Official Demo Coverage
 
@@ -90,6 +74,8 @@ npx pretext-skill init --ai all --offline --force
 | Show package versions | `npx pretext-skill versions` |
 | Inspect local install state | `npx pretext-skill doctor` |
 
+If a target assistant is already open, restart it after install or update so it reloads the bundle.
+
 ## Repo Layout
 
 ```text
@@ -106,10 +92,17 @@ docs/          user-facing documentation
 - [docs/official-demos.md](docs/official-demos.md)
 - [docs/examples.md](docs/examples.md)
 - [docs/platforms](docs/platforms)
-- [references/official-notes.md](references/official-notes.md)
+- [docs/troubleshooting.md](docs/troubleshooting.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Current Constraints
 
-- The installer is publish-ready in structure, but this repo is not automatically published to npm from here.
-- Local usage works today after `npm install && npm run build`.
-- The bundle is browser-first and follows upstream limits around `system-ui`, DOM measurement, and server-side claims.
+- The installer is usable from the repo today after `npm install && npm run build`.
+- The bundle is browser-first.
+- Fonts still need deliberate selection; see the installed `references/font-strategy.md`.
+
+## Reporting Issues And Contributing
+
+- Report installer, recognition, style, or example problems through the issue flow in [CONTRIBUTING.md](CONTRIBUTING.md).
+- Use the included bug report template under [.github/ISSUE_TEMPLATE](.github/ISSUE_TEMPLATE).
+- Fork and open a PR when fixing install paths, bundle content, examples, or docs.
