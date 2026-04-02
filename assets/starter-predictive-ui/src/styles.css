@@ -1,0 +1,132 @@
+:root {
+  color-scheme: dark;
+  --page: #0f1418;
+  --panel: #182127;
+  --panel-2: #223039;
+  --ink: #f4efe6;
+  --muted: #b9c2c6;
+  --accent: #f6a94a;
+  --accent-2: #78d7ce;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(246, 169, 74, 0.18), transparent 28%),
+    radial-gradient(circle at 80% 20%, rgba(120, 215, 206, 0.14), transparent 22%),
+    var(--page);
+  color: var(--ink);
+}
+
+.page {
+  width: min(1120px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 40px 0 64px;
+}
+
+.hero {
+  max-width: 720px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-size: clamp(3rem, 7vw, 5.25rem);
+  line-height: 0.95;
+}
+
+.intro {
+  max-width: 58ch;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.wall {
+  margin-top: 28px;
+  padding: 22px;
+  border: 1px solid rgba(244, 239, 230, 0.1);
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(24, 33, 39, 0.94), rgba(15, 20, 24, 0.9));
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
+}
+
+.controls {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: grid;
+  gap: 10px;
+  color: var(--muted);
+}
+
+input[type='range'] {
+  width: min(420px, 70vw);
+}
+
+output {
+  color: var(--accent-2);
+}
+
+.messages {
+  --bubble-width: 340px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--bubble-width), 100%), 1fr));
+  gap: 16px;
+}
+
+.bubble {
+  padding: 16px 18px;
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(246, 169, 74, 0.14), transparent 45%),
+    var(--panel-2);
+  border: 1px solid rgba(246, 169, 74, 0.18);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.bubble:hover {
+  transform: translateY(-2px);
+  border-color: rgba(120, 215, 206, 0.4);
+}
+
+.bubble p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.bubble span {
+  display: block;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 720px) {
+  .page {
+    width: min(100vw - 20px, 1120px);
+    padding-top: 24px;
+  }
+
+  .controls {
+    align-items: start;
+    flex-direction: column;
+  }
+}

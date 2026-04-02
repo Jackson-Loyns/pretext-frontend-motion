@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pretext Frontend Motion"
+  short_description: "Generate polished Pretext-powered text layout demos and typography motion experiments"
+  default_prompt: "Build a complete Pretext-powered frontend demo with a strong visual direction, real text-layout logic, and clear run instructions."

@@ -1,0 +1,107 @@
+:root {
+  color-scheme: light;
+  --page: #efe6d8;
+  --paper: #fbf6ee;
+  --ink: #1f1a16;
+  --muted: #665d54;
+  --accent: #aa5b34;
+  --line: rgba(31, 26, 22, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(170, 91, 52, 0.16), transparent 24%),
+    linear-gradient(180deg, #f5ede0, var(--page));
+  font-family: "Iowan Old Style", Georgia, serif;
+}
+
+.page {
+  width: min(1080px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 32px 0 56px;
+}
+
+.hero {
+  max-width: 720px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.92;
+}
+
+.intro {
+  max-width: 60ch;
+  color: var(--muted);
+  line-height: 1.6;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.spread {
+  margin-top: 24px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--paper);
+  box-shadow: 0 24px 60px rgba(76, 51, 30, 0.12);
+}
+
+.column {
+  position: relative;
+  min-height: 460px;
+}
+
+.body {
+  position: relative;
+  max-width: 680px;
+  font-size: 18px;
+  line-height: 29px;
+}
+
+.body span {
+  position: absolute;
+  display: block;
+}
+
+.orb {
+  position: absolute;
+  width: 172px;
+  height: 172px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.08) 36%, transparent 37%),
+    radial-gradient(circle at 40% 40%, rgba(170, 91, 52, 0.6), rgba(67, 31, 18, 0.9));
+  box-shadow: 0 20px 36px rgba(67, 31, 18, 0.26);
+  cursor: grab;
+}
+
+.orb:active {
+  cursor: grabbing;
+}
+
+@media (max-width: 720px) {
+  .page {
+    width: min(100vw - 18px, 1080px);
+    padding-top: 20px;
+  }
+
+  .spread {
+    padding: 18px;
+  }
+}

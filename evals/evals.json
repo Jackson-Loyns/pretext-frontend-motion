@@ -1,0 +1,23 @@
+{
+  "skill_name": "pretext-frontend-motion",
+  "evals": [
+    {
+      "id": "predictive-ui-wall",
+      "prompt": "Build a premium multilingual message wall demo where each text bubble knows its height before paint. The result should feel compact and editorial, not like a generic dashboard.",
+      "expected_output": "A complete predictive-ui demo that uses Pretext in the sizing path and produces width-tight message bubbles without DOM text measurement.",
+      "files": []
+    },
+    {
+      "id": "editorial-routing-hero",
+      "prompt": "Create a typography-heavy landing page hero where the headline and body text route around floating circular artwork and reflow cleanly on resize.",
+      "expected_output": "An editorial-routing demo with obstacle-aware text flow, visible composition, and responsive rerouting.",
+      "files": []
+    },
+    {
+      "id": "kinetic-type-canvas",
+      "prompt": "Make a canvas-based kinetic typography poster where measured text reacts to pointer movement and settles back into its original line layout.",
+      "expected_output": "A kinetic-typography demo where motion is anchored to Pretext-derived line or glyph positions rather than decorative-only animation.",
+      "files": []
+    }
+  ]
+}

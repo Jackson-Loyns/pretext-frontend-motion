@@ -1,0 +1,70 @@
+:root {
+  color-scheme: dark;
+  --ink: #dff7ef;
+  --muted: #93a9b5;
+  --accent: #80f5e0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(128, 245, 224, 0.18), transparent 25%),
+    radial-gradient(circle at 80% 10%, rgba(60, 112, 255, 0.16), transparent 20%),
+    #03070b;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.page {
+  width: min(1120px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+
+.copy {
+  max-width: 700px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  line-height: 0.95;
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: min(70vh, 640px);
+  margin-top: 20px;
+  border-radius: 28px;
+  border: 1px solid rgba(223, 247, 239, 0.1);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 720px) {
+  .page {
+    width: min(100vw - 18px, 1120px);
+    padding-top: 18px;
+  }
+
+  canvas {
+    height: 56vh;
+  }
+}
