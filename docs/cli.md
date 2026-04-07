@@ -1,33 +1,39 @@
 # CLI Guide
 
-## Use The Workspace Command During Development
+## Two Ways To Run The CLI
 
-Inside this repository, prefer:
+Use the global package if you install it once:
+
+```bash
+pretext-skill <command>
+```
+
+Use the published package outside this repository when you do not want a global install:
+
+```bash
+npx pretext-skill@0.3.1 <command>
+```
+
+Use the workspace command during development:
 
 ```bash
 npm run cli -- <command>
 ```
 
-That uses the current workspace build directly.
-
-For packaged usage outside the repo, use:
-
-```bash
-npx pretext-skill <command>
-```
+The workspace form uses the current local build directly.
 
 ## Main Commands
 
-| Goal | Command |
-| --- | --- |
-| Show versions | `npm run cli -- versions` |
-| Install one target | `npm run cli -- init claude-code --force` |
-| Install all targets | `npm run cli -- init all --force` |
-| Update installed targets | `npm run cli -- update --offline --force` |
-| Check install state | `npm run cli -- doctor` |
-| Scaffold a starter | `npm run cli -- scaffold --kind predictive-ui --out demo` |
-| List starter presets | `npm run cli -- list-presets --kind kinetic-typography` |
-| Validate the repo | `npm run cli -- validate .` |
+| Goal | Global package command | Local repo command | Published package command |
+| --- | --- | --- | --- |
+| Show versions | `pretext-skill versions` | `npm run cli -- versions` | `npx pretext-skill@0.3.1 versions` |
+| Install one target | `pretext-skill init claude-code --force` | `npm run cli -- init claude-code --force` | `npx pretext-skill@0.3.1 init claude-code --force` |
+| Install all targets | `pretext-skill init all --force` | `npm run cli -- init all --force` | `npx pretext-skill@0.3.1 init all --force` |
+| Update installed targets | `pretext-skill update --offline --force` | `npm run cli -- update --offline --force` | `npx pretext-skill@0.3.1 update --offline --force` |
+| Check install state | `pretext-skill doctor` | `npm run cli -- doctor` | `npx pretext-skill@0.3.1 doctor` |
+| Scaffold a starter | `pretext-skill scaffold --kind predictive-ui --out demo` | `npm run cli -- scaffold --kind predictive-ui --out demo` | `npx pretext-skill@0.3.1 scaffold --kind predictive-ui --out demo` |
+| List starter presets | `pretext-skill list-presets --kind kinetic-typography` | `npm run cli -- list-presets --kind kinetic-typography` | `npx pretext-skill@0.3.1 list-presets --kind kinetic-typography` |
+| Validate the repo | `pretext-skill validate .` | `npm run cli -- validate .` | `npx pretext-skill@0.3.1 validate .` |
 
 ## Preferred Target Names
 
@@ -50,7 +56,17 @@ Use the real assistant or CLI name in commands:
 
 Compatibility aliases still work, but they are not the preferred names in the docs.
 
-## Local Flow
+## Recommended Install Flow
+
+```bash
+npm install -g pretext-skill@0.3.1
+pretext-skill versions
+pretext-skill init claude-code --force
+pretext-skill list-presets --kind kinetic-typography
+pretext-skill doctor
+```
+
+## Recommended Development Flow
 
 ```bash
 npm install
@@ -66,6 +82,7 @@ npm run cli -- doctor
 
 ```bash
 npm run cli -- update --offline --force
+npx pretext-skill@0.3.1 update --offline --force
 ```
 
 Restart the target assistant after install or update so it reloads the bundle.

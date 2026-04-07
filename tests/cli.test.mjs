@@ -26,8 +26,12 @@ test('init installs a platform bundle', () => {
     assert.equal(result.status, 0, result.stderr)
     const skillPath = path.join(home, '.codex', 'skills', 'pretext-frontend-motion', 'SKILL.md')
     const manifestPath = path.join(home, '.codex', 'skills', 'pretext-frontend-motion', '.pretext-install.json')
+    const integrationsReadmePath = path.join(home, '.codex', 'skills', 'pretext-frontend-motion', 'integrations', 'README.md')
+    const gotchasPath = path.join(home, '.codex', 'skills', 'pretext-frontend-motion', 'references', 'integration-gotchas.md')
     assert.match(readFileSync(skillPath, 'utf8'), /Pretext Frontend Motion/)
     assert.match(readFileSync(manifestPath, 'utf8'), /"platform": "codex"/)
+    assert.match(readFileSync(integrationsReadmePath, 'utf8'), /real TypeScript projects/)
+    assert.match(readFileSync(gotchasPath, 'utf8'), /Font Loading/)
   } finally {
     rmSync(home, { recursive: true, force: true })
   }

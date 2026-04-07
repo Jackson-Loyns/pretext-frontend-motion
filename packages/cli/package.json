@@ -6,7 +6,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "pretext-skill": "./bin/pretext-skill.js"
+    "pretext-skill": "bin/pretext-skill.js"
   },
   "exports": {
     ".": {

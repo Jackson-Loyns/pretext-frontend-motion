@@ -8,3 +8,5 @@ __pycache__/
 packages/cli/assets/
 *.tgz
 .idea/
+integrations/**/package-lock.json
+integrations/**/tsconfig.tsbuildinfo

@@ -47,6 +47,18 @@ Create a canvas-based ASCII poster where measured lines provide anchor positions
 
 Create a near-white technical landing scene inspired by sparse algorithm visualization rather than a SaaS hero. Use `prepareWithSegments()` and `layoutWithLines()` so the main word or phrase is built from measured glyph anchors, while small peripheral labels drift across the field. Keep the typography restrained, airy, and precise. Avoid centered startup-template composition, oversized gradient blobs, or warm editorial paper styling.
 
+### Technical Lab White, Dense Sample
+
+Build a sparse white signal field similar to a computational research intro page. Use a large measured central word, many tiny distributed labels, and low-contrast accents in violet, graphite, and soft magenta. Motion should come from local drift, aggregation, and dispersal around the measured anchors. Do not use a standard headline-plus-subtitle hero.
+
+### Editorial Paper, Dense Sample
+
+Build a warm editorial spread with a serif-led title, routed body text, and one strong compositional interruption such as a quote marker or circular annotation. The page should feel like a curated printed piece, not a startup landing page painted beige.
+
+### Kinetic Dark Poster, Dense Sample
+
+Create a dark kinetic poster with a single dominant phrase, luminous glyph fragments, and a measured field that pulses around the pointer. Use Pretext line anchors as the structure behind the motion and avoid UI chrome, dashboards, and app-like sections.
+
 ### Editorial Engine
 
 Build an editorial engine demo with a pull quote, animated orbs, and two-column text flow. The composition should reflow live while staying in Pretext instead of DOM measurement.

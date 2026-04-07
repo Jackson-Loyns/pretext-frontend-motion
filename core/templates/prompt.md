@@ -4,6 +4,14 @@ Use this workflow when the request maps to one of the official Pretext demo fami
 Accordion, Bubbles, Dynamic Layout, Variable Typographic ASCII, Editorial Engine,
 Justification Comparison, Rich Text, or Masonry.
 
+Typical trigger patterns:
+
+- measure text height without DOM reflow
+- auto-fit text into a fixed number of lines
+- route text around an obstacle
+- build shrink-wrap bubbles
+- create algorithmic typography motion
+
 Required constraints:
 
 - Keep Pretext in the real layout path.
@@ -19,13 +27,17 @@ Bundled references:
 - `references/design-rules.md`
 - `references/font-strategy.md`
 - `references/style-profiles.md`
+- `references/integration-gotchas.md`
 - `examples/README.md`
 - `examples/`
+- `integrations/README.md`
+- `integrations/`
 - `blueprints/`
 
 Recommended workflow:
 
 1. Match the request to an official demo family.
-2. Start from the corresponding bundled example or blueprint.
-3. Keep the visual direction bold, intentional, and non-generic.
-4. Explain how Pretext is being used in the final result.
+2. Choose the matching style profile before implementation.
+3. Start from the corresponding bundled example or blueprint.
+4. Keep the visual direction bold, intentional, and non-generic.
+5. Explain how Pretext is being used in the final result.

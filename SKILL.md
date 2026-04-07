@@ -11,24 +11,36 @@ Use this skill when the request clearly maps to an official Pretext demo family.
 
 Do not treat Pretext as a decorative dependency. Keep it in the actual layout path.
 
+Typical trigger patterns:
+
+- measure text height without DOM reflow
+- auto-fit text to a fixed number of lines
+- tight multilingual bubbles
+- routed text around an obstacle
+- algorithmic typography or glyph-field motion
+- line-breaking or justification comparison
+
 ## Required Workflow
 
 1. Pick the official demo family.
-2. Use the matching bundled example or blueprint.
-3. Stay in the correct API lane:
+2. Pick the matching style profile before writing code.
+3. Use the matching bundled example or blueprint.
+4. Stay in the correct API lane:
    - `prepare` + `layout` for Accordion, Bubbles, Masonry
    - `prepareWithSegments` + `layoutNextLine` for Dynamic Layout and Editorial Engine
    - `prepareWithSegments` + `layoutWithLines` for Variable Typographic ASCII
    - `walkLineRanges` for width probing and layout comparison flows
-4. Keep the design intentional.
-5. Validate resize, mobile, and hot-path measurement rules.
+5. Keep the design intentional.
+6. Validate resize, mobile, and hot-path measurement rules.
 
 ## Bundled Resources
 
 - `core/bundle/references/official-notes.md`
 - `core/bundle/references/demo-family-map.md`
 - `core/bundle/references/prompt-recipes.md`
+- `core/bundle/references/integration-gotchas.md`
 - `core/bundle/examples/`
+- `core/bundle/integrations/`
 - `core/bundle/blueprints/`
 
 ## Validation Checklist

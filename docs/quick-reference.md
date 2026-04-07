@@ -22,7 +22,34 @@ Pick the official demo family first. Then start from the matching bundled exampl
 | compare paragraph layout choices | Justification Comparison |
 | mixed inline pills, links, and text | Rich Text |
 
+## Choose The Style Profile
+
+| If you want | Profile |
+| --- | --- |
+| asymmetrical spread, warm paper, serif-led hierarchy | `editorial-paper` |
+| sparse near-white field, algorithmic labels, signal-map feel | `technical-lab-white` |
+| dark field, stronger contrast, glyph or particle motion | `kinetic-dark-poster` |
+| tighter cards, bubbles, accordions, measured utility UI | `compact-measured-ui` |
+
 ## Use These Commands
+
+Global package:
+
+```bash
+npm install -g pretext-skill@0.3.1
+pretext-skill init claude-code --force
+pretext-skill list-presets --kind kinetic-typography
+pretext-skill doctor
+```
+
+Published package:
+
+```bash
+npx pretext-skill@0.3.1 versions
+npx pretext-skill@0.3.1 init claude-code --force
+npx pretext-skill@0.3.1 list-presets --kind kinetic-typography
+npx pretext-skill@0.3.1 doctor
+```
 
 Inside this repo:
 
@@ -30,13 +57,8 @@ Inside this repo:
 npm install
 npm run build
 npm run cli -- init claude-code --force
+npm run cli -- list-presets --kind kinetic-typography
 npm run cli -- doctor
-```
-
-Packaged usage:
-
-```bash
-npx pretext-skill init claude-code --force
 ```
 
 To scaffold a runnable starter:
@@ -61,3 +83,5 @@ npm run cli -- scaffold --kind predictive-ui --out demo
 - [docs/cli.md](cli.md)
 - [docs/official-demos.md](official-demos.md)
 - [docs/examples.md](examples.md)
+- [docs/install.md](install.md)
+- [docs/usage.md](usage.md)

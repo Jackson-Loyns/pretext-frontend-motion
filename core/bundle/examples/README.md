@@ -9,6 +9,12 @@ Each runnable example is a static ESM package:
 - it runs with `npm install` and `npm start`
 - it can be steered with the bundled style profiles in `references/style-profiles.md`
 
+Recommended style pairings:
+
+- Accordion, Bubbles, Masonry -> `compact-measured-ui`
+- Dynamic Layout, Editorial Engine -> `editorial-paper` or `technical-lab-white`
+- Variable Typographic ASCII -> `technical-lab-white` or `kinetic-dark-poster`
+
 | Demo family | Folder | APIs | Use it for |
 | --- | --- | --- | --- |
 | Accordion | `examples/accordion` | `prepare`, `layout` | measured expand/collapse panels |

@@ -1,0 +1,141 @@
+:root {
+  color: #101828;
+  background: #f6f1e8;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 48px 20px 72px;
+  background:
+    radial-gradient(circle at top left, rgba(89, 130, 246, 0.14), transparent 26%),
+    linear-gradient(180deg, #fbf6ef 0%, #f1e8db 100%);
+}
+
+.hero,
+.panel {
+  width: min(920px, 100%);
+  margin: 0 auto;
+}
+
+.hero {
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  color: #3657c7;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: "Iowan Old Style", Georgia, serif;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
+.intro {
+  margin-top: 12px;
+  max-width: 64ch;
+  color: #475467;
+}
+
+.panel {
+  padding: 24px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 18px 50px rgba(33, 52, 90, 0.1);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.panel-header p {
+  margin-top: 6px;
+  color: #667085;
+}
+
+.badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #dfe7fd;
+  color: #1d4ed8;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.frame {
+  resize: horizontal;
+  overflow: auto;
+  min-width: 280px;
+  width: min(560px, 100%);
+  padding: 18px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #0f172a 0%, #172033 100%);
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+}
+
+.bubble {
+  padding: 14px 16px 12px;
+  border-radius: 20px;
+  color: white;
+  transition: min-height 180ms ease;
+}
+
+.bubble footer {
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.bubble--system {
+  background: #2563eb;
+}
+
+.bubble--user {
+  justify-self: end;
+  background: #364152;
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding-inline: 14px;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    align-items: start;
+  }
+}

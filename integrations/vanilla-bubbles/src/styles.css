@@ -1,0 +1,146 @@
+:root {
+  color: #111827;
+  background: #f7f3ec;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 48px 20px 72px;
+  background:
+    radial-gradient(circle at top right, rgba(219, 179, 118, 0.22), transparent 28%),
+    linear-gradient(180deg, #fbf7f1 0%, #f3ece2 100%);
+}
+
+.hero,
+.panel {
+  width: min(920px, 100%);
+  margin: 0 auto;
+}
+
+.hero {
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: #9a5b2a;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: "Iowan Old Style", Georgia, serif;
+}
+
+h1 {
+  font-size: clamp(2.3rem, 5vw, 4rem);
+}
+
+.intro {
+  margin-top: 12px;
+  max-width: 62ch;
+  color: #4b5563;
+}
+
+.panel {
+  padding: 24px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 18px 50px rgba(48, 30, 12, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.panel-header p {
+  margin-top: 6px;
+  color: #6b7280;
+}
+
+.badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #efe2cf;
+  color: #7a451f;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.frame {
+  resize: horizontal;
+  overflow: auto;
+  min-width: 280px;
+  width: min(560px, 100%);
+  padding: 18px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #131d31 0%, #0f1626 100%);
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+}
+
+.bubble {
+  padding: 14px 16px 12px;
+  border-radius: 20px;
+  color: white;
+  transition: min-height 180ms ease;
+}
+
+.bubble p {
+  line-height: 1.5;
+}
+
+.bubble footer {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 12px;
+}
+
+.bubble--system {
+  background: #2d6ff7;
+}
+
+.bubble--user {
+  justify-self: end;
+  background: #364152;
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding-inline: 14px;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    align-items: start;
+  }
+}
