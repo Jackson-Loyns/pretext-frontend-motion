@@ -26,9 +26,10 @@ Include:
 2. Create a branch from `main`.
 3. Make the change.
 4. Run local checks:
-   - `npm run cli -- validate .`
+   - `python3 scripts/validate_skill.py .`
    - `npm run build`
    - `npm test`
+   - `npm run check:integrations`
 5. If you changed examples, run the affected example(s) with `npm start`.
 6. Open a pull request with:
    - problem summary
@@ -41,3 +42,4 @@ Include:
 - `packages/cli/` because they affect distribution behavior
 - `core/bundle/references/` because they affect AI output quality
 - `core/bundle/examples/` because they are the public proof that the bundle works
+- `integrations/` because they are the real project adoption layer

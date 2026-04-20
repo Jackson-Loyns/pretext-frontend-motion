@@ -3,6 +3,8 @@
 [![npm version](https://img.shields.io/npm/v/pretext-skill)](https://www.npmjs.com/package/pretext-skill)
 [![license](https://img.shields.io/github/license/Jackson-Loyns/pretext-frontend-motion)](https://github.com/Jackson-Loyns/pretext-frontend-motion/blob/main/LICENSE.txt)
 [![npm downloads](https://img.shields.io/npm/dm/pretext-skill)](https://www.npmjs.com/package/pretext-skill)
+[![CI](https://img.shields.io/github/actions/workflow/status/Jackson-Loyns/pretext-frontend-motion/ci.yml?branch=main)](https://github.com/Jackson-Loyns/pretext-frontend-motion/actions/workflows/ci.yml)
+[![GitHub release](https://img.shields.io/github/v/release/Jackson-Loyns/pretext-frontend-motion)](https://github.com/Jackson-Loyns/pretext-frontend-motion/releases)
 
 Pretext Frontend Motion is a multi-CLI skill bundle and npm CLI for assistants that need measured typography, routed text layout, and motion driven by real Pretext geometry instead of DOM text reads.
 
@@ -144,6 +146,7 @@ Start with these pages:
 - [docs/cli.md](docs/cli.md)
 - [docs/examples.md](docs/examples.md)
 - [docs/official-demos.md](docs/official-demos.md)
+- [docs/repository-structure.md](docs/repository-structure.md)
 - [integrations/README.md](integrations/README.md)
 - [references/integration-gotchas.md](references/integration-gotchas.md)
 
@@ -163,3 +166,13 @@ npm run check:integrations
 If you find install failures, recognition problems, generic output, or integration issues, open an issue or pull request with validation notes.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/troubleshooting.md](docs/troubleshooting.md).
+
+## Project Health
+
+The repository includes:
+
+- GitHub Actions CI
+- Dependabot for npm and GitHub Actions
+- issue and PR templates
+- security reporting guidance
+- a repository structure guide for contributors
