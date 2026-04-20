@@ -1,5 +1,9 @@
 # Pretext Frontend Motion
 
+[![npm version](https://img.shields.io/npm/v/pretext-skill)](https://www.npmjs.com/package/pretext-skill)
+[![license](https://img.shields.io/github/license/Jackson-Loyns/pretext-frontend-motion)](https://github.com/Jackson-Loyns/pretext-frontend-motion/blob/main/LICENSE.txt)
+[![npm downloads](https://img.shields.io/npm/dm/pretext-skill)](https://www.npmjs.com/package/pretext-skill)
+
 Pretext Frontend Motion is a multi-CLI skill bundle and npm CLI for assistants that need measured typography, routed text layout, and motion driven by real Pretext geometry instead of DOM text reads.
 
 It is built on the official work by Cheng Lou:
@@ -19,6 +23,20 @@ The repository combines:
 - skill content that routes requests into real Pretext usage
 - runnable examples based on the official demo families
 - TypeScript integration examples for real projects
+
+## Quickstart
+
+```bash
+npm install -g pretext-skill@0.3.1
+pretext-skill init codex --force
+```
+
+Then ask for work like:
+
+- "measure text height without DOM reflow"
+- "build tight multilingual bubbles"
+- "route text around an obstacle"
+- "create algorithmic typography motion with real text geometry"
 
 ## Install
 

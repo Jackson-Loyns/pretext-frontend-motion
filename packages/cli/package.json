@@ -2,6 +2,26 @@
   "name": "pretext-skill",
   "version": "0.3.1",
   "description": "Installer CLI for the Pretext Frontend Motion multi-platform skill bundle",
+  "keywords": [
+    "pretext",
+    "text-metrics",
+    "frontend",
+    "typography",
+    "ai-agent",
+    "agent-skills",
+    "codex",
+    "claude-code",
+    "cursor",
+    "typescript"
+  ],
+  "homepage": "https://github.com/Jackson-Loyns/pretext-frontend-motion#readme",
+  "bugs": {
+    "url": "https://github.com/Jackson-Loyns/pretext-frontend-motion/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jackson-Loyns/pretext-frontend-motion.git"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
