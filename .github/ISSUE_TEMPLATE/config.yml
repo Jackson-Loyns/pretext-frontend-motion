@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Support and usage questions
+    url: https://github.com/Jackson-Loyns/pretext-frontend-motion/blob/main/SUPPORT.md
+    about: Read support guidance before opening an issue.
+  - name: Project roadmap
+    url: https://github.com/Jackson-Loyns/pretext-frontend-motion/blob/main/ROADMAP.md
+    about: Check current priorities and contribution areas.

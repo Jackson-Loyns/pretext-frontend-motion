@@ -166,6 +166,9 @@ Start with these pages:
 - [docs/repository-structure.md](docs/repository-structure.md)
 - [integrations/README.md](integrations/README.md)
 - [references/integration-gotchas.md](references/integration-gotchas.md)
+- [ROADMAP.md](ROADMAP.md)
+- [CHANGELOG.md](CHANGELOG.md)
+- [SUPPORT.md](SUPPORT.md)
 
 ## Validation
 
@@ -191,5 +194,7 @@ The repository includes:
 - GitHub Actions CI
 - Dependabot for npm and GitHub Actions
 - issue and PR templates
+- issue template config with support links
 - security reporting guidance
 - a repository structure guide for contributors
+- a public roadmap and changelog
