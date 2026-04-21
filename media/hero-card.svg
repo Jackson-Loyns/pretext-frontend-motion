@@ -1,0 +1,68 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="640" rx="32" fill="#F7F2E8"/>
+  <rect x="24" y="24" width="1232" height="592" rx="28" fill="url(#bg)"/>
+  <g opacity="0.7">
+    <circle cx="1106" cy="144" r="116" fill="url(#orbA)"/>
+    <circle cx="1004" cy="500" r="168" fill="url(#orbB)"/>
+    <circle cx="236" cy="548" r="182" fill="url(#orbC)"/>
+  </g>
+  <rect x="72" y="72" width="138" height="36" rx="18" fill="#FFF7EC" fill-opacity="0.92"/>
+  <text x="94" y="95" fill="#A65A16" font-size="18" font-family="Arial, Helvetica, sans-serif" letter-spacing="2.2">PRETEXT</text>
+  <text x="72" y="188" fill="#0E1726" font-size="70" font-weight="700" font-family="Georgia, 'Times New Roman', serif">Pretext Frontend Motion</text>
+  <text x="72" y="242" fill="#334155" font-size="28" font-family="Arial, Helvetica, sans-serif">Multi-CLI skill bundle and npm package for text layout, typography,</text>
+  <text x="72" y="280" fill="#334155" font-size="28" font-family="Arial, Helvetica, sans-serif">and frontend motion powered by real Pretext measurement.</text>
+
+  <rect x="72" y="330" width="320" height="58" rx="18" fill="#0E1726"/>
+  <text x="102" y="367" fill="#F9FAFB" font-size="26" font-family="Menlo, Monaco, monospace">npm i -g pretext-skill</text>
+
+  <rect x="72" y="414" width="180" height="42" rx="21" fill="#FFF7EC" fill-opacity="0.92"/>
+  <text x="97" y="441" fill="#0F172A" font-size="20" font-family="Arial, Helvetica, sans-serif">Codex</text>
+  <rect x="266" y="414" width="212" height="42" rx="21" fill="#FFF7EC" fill-opacity="0.92"/>
+  <text x="292" y="441" fill="#0F172A" font-size="20" font-family="Arial, Helvetica, sans-serif">Claude Code</text>
+  <rect x="492" y="414" width="172" height="42" rx="21" fill="#FFF7EC" fill-opacity="0.92"/>
+  <text x="519" y="441" fill="#0F172A" font-size="20" font-family="Arial, Helvetica, sans-serif">Cursor</text>
+  <rect x="678" y="414" width="208" height="42" rx="21" fill="#FFF7EC" fill-opacity="0.92"/>
+  <text x="704" y="441" fill="#0F172A" font-size="20" font-family="Arial, Helvetica, sans-serif">Gemini CLI</text>
+
+  <rect x="72" y="480" width="156" height="40" rx="20" fill="#E8EEFF"/>
+  <text x="101" y="505" fill="#1D4ED8" font-size="18" font-family="Arial, Helvetica, sans-serif">React</text>
+  <rect x="244" y="480" width="140" height="40" rx="20" fill="#E8F7EE"/>
+  <text x="284" y="505" fill="#15803D" font-size="18" font-family="Arial, Helvetica, sans-serif">Vue</text>
+  <rect x="400" y="480" width="152" height="40" rx="20" fill="#FFF0F7"/>
+  <text x="438" y="505" fill="#BE185D" font-size="18" font-family="Arial, Helvetica, sans-serif">Svelte</text>
+  <rect x="568" y="480" width="178" height="40" rx="20" fill="#EEF2FF"/>
+  <text x="603" y="505" fill="#4338CA" font-size="18" font-family="Arial, Helvetica, sans-serif">Vanilla TS</text>
+
+  <rect x="760" y="108" width="426" height="324" rx="28" fill="#FBF7EF" fill-opacity="0.92"/>
+  <text x="800" y="156" fill="#0F172A" font-size="22" font-family="Arial, Helvetica, sans-serif" font-weight="700">What it ships</text>
+
+  <text x="800" y="210" fill="#475467" font-size="20" font-family="Arial, Helvetica, sans-serif">• Skill bundle for real Pretext routing</text>
+  <text x="800" y="248" fill="#475467" font-size="20" font-family="Arial, Helvetica, sans-serif">• Official-family examples and blueprints</text>
+  <text x="800" y="286" fill="#475467" font-size="20" font-family="Arial, Helvetica, sans-serif">• React / Vue / Svelte / Vanilla integrations</text>
+  <text x="800" y="324" fill="#475467" font-size="20" font-family="Arial, Helvetica, sans-serif">• No DOM text reads in the hot path</text>
+  <text x="800" y="362" fill="#475467" font-size="20" font-family="Arial, Helvetica, sans-serif">• npm package + GitHub release</text>
+
+  <rect x="760" y="460" width="426" height="108" rx="28" fill="#0E1726"/>
+  <text x="794" y="506" fill="#F9FAFB" font-size="24" font-family="Arial, Helvetica, sans-serif" font-weight="700">Use cases</text>
+  <text x="794" y="546" fill="#CBD5E1" font-size="19" font-family="Arial, Helvetica, sans-serif">Accordion · Bubbles · Dynamic Layout · Editorial Engine</text>
+
+  <defs>
+    <linearGradient id="bg" x1="82" y1="78" x2="1188" y2="592" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8EE"/>
+      <stop offset="0.5" stop-color="#F4EFE6"/>
+      <stop offset="1" stop-color="#F7F2E8"/>
+    </linearGradient>
+    <radialGradient id="orbA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1106 144) rotate(90) scale(116)">
+      <stop stop-color="#C4B5FD"/>
+      <stop offset="1" stop-color="#C4B5FD" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orbB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1004 500) rotate(90) scale(168)">
+      <stop stop-color="#F9A8D4"/>
+      <stop offset="1" stop-color="#F9A8D4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orbC" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(236 548) rotate(90) scale(182)">
+      <stop stop-color="#BFDBFE"/>
+      <stop offset="1" stop-color="#BFDBFE" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

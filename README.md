@@ -6,6 +6,8 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/Jackson-Loyns/pretext-frontend-motion/ci.yml?branch=main)](https://github.com/Jackson-Loyns/pretext-frontend-motion/actions/workflows/ci.yml)
 [![GitHub release](https://img.shields.io/github/v/release/Jackson-Loyns/pretext-frontend-motion)](https://github.com/Jackson-Loyns/pretext-frontend-motion/releases)
 
+![Pretext Frontend Motion social card](media/hero-card.svg)
+
 Pretext Frontend Motion is a multi-CLI skill bundle and npm CLI for assistants that need measured typography, routed text layout, and motion driven by real Pretext geometry instead of DOM text reads.
 
 It is built on the official work by Cheng Lou:
@@ -25,6 +27,21 @@ The repository combines:
 - skill content that routes requests into real Pretext usage
 - runnable examples based on the official demo families
 - TypeScript integration examples for real projects
+
+## Why It Matters
+
+Most AI-generated frontend output still collapses into:
+
+- generic hero layouts
+- DOM text measurement after paint
+- animation that has no relationship to text geometry
+
+This project gives assistants a stronger default:
+
+- real Pretext API usage
+- official-family examples instead of vague inspiration
+- framework integration paths for React, Vue, Svelte, and Vanilla TypeScript
+- a published npm installer instead of a repo-only prompt pack
 
 ## Quickstart
 
